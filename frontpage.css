@@ -1,0 +1,151 @@
+/* ----- BASIC STYLE RESET ----- */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-image: url("images/loginformbackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ----- HEADER ----- */
+.header {
+     background: white;
+    height: 80px;       
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-icon {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+    margin-left: -10px;
+}
+
+/* ----- NAVIGATION ----- */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+
+/* ----- DROPDOWNS ----- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    min-width: 150px;
+}
+
+.dropdown-menu li {
+    padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+    color: black;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* ----- HEADER ICONS ----- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-btn {
+    padding: 6px 12px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.cart-icon {
+    width: 26px;
+    cursor: pointer;
+}
+
+/* ----- HERO ----- */
+.hero {
+    background: url("images/hero.jpg") center/cover no-repeat;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 2px 5px black;
+}
+
+/* ----- PRODUCTS SECTION ----- */
+.products-section {
+    padding: 40px;
+}
+
+.products-section h2 {
+    margin: 0 0 20px 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* ----- FOOTER ----- */
+.footer {
+    background: #222;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    margin-top: 40px;
+}

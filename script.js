@@ -80,22 +80,38 @@ rows.forEach(row => {
     row.scrollLeft = scrollLeft - walk;
   });
 });
-const forgotBtn = document.querySelector(".forgot");
+
+const forgotBtn = document.getElementById("forgot-btn");
 const resetBox = document.getElementById("reset-box");
 const resetBack = document.getElementById("reset-back");
 const resetSubmit = document.getElementById("reset-submit");
+const loginBoxDiv = document.querySelector(".login-box");
 
-forgotBtn.addEventListener("click", () =>{
-  loginBox.style.display = "none";
-  resetBox.style.display = "flex";
+// OPEN reset screen
+forgotBtn.addEventListener("click", () => {
+    loginBoxDiv.style.display = "none";
+    resetBox.style.display = "flex";
 });
 
+// Kthehu te login
 resetBack.addEventListener("click", () => {
-  let email = document.getElementById("reset-email").value;
+    resetBox.style.display = "none";
+    loginBoxDiv.style.display = "flex";
+});
 
-  if(!email.includes("@")) {
-    alert("Please enter a valid email address");
-  } else {
-        alert("A reset link has been sent to: " + email);
-  }
+resetSubmit.addEventListener("click", () => {
+
+    let email = document.getElementById("reset-email").value;
+
+    if(!email.includes("@")){
+        alert("Enter a valid email.");
+        return;
+    }
+
+    document.getElementById("reset-popup").style.display = "flex";
+});
+document.getElementById("popup-ok").addEventListener("click", () => {
+    document.getElementById("reset-popup").style.display = "none";
+    resetBox.style.display = "none";
+    loginBoxDiv.style.display = "flex";
 });

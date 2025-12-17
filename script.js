@@ -2,9 +2,7 @@ const nextBtn = document.querySelector('.next-btn');
 const backArrow = document.querySelector('.back-arrow');
 const loginBox = document.querySelector('.login-box');
 const altLogin = loginBox.querySelector('.alt-login');
-<<<<<<< HEAD
 const orContinue = loginBox.querySelector('.or-continue');
-
 const usernameInput = loginBox.querySelector('.username-input');
 
 let passwordShown = false;
@@ -26,42 +24,21 @@ nextBtn.addEventListener('click', () => {
         passwordInput.style.borderRadius = style.borderRadius;
         passwordInput.style.border = style.border;
         passwordInput.style.outline = style.outline;
-=======
-const orContinue = loginBox.querySelector('p1');
 
-let usernameInput = loginBox.querySelector('input');
-let passwordShown = false;
-
-nextBtn.addEventListener('click', () => {
-    if (!passwordShown) {
-
-        const passwordInput = document.createElement('input');
-        passwordInput.type = 'password';
-        passwordInput.placeholder = 'Password';
-        passwordInput.style.width = usernameInput.style.width;
-        passwordInput.style.padding = usernameInput.style.padding;
-        passwordInput.style.borderRadius = usernameInput.style.borderRadius;
-        passwordInput.style.border = usernameInput.style.border;
-        passwordInput.style.outline = usernameInput.style.outline;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
-
+        // Replace username with password input
         loginBox.replaceChild(passwordInput, usernameInput);
 
         orContinue.style.display = 'none';
         altLogin.style.display = 'none';
-        backArrow.style.display = 'block'; 
+        backArrow.style.display = 'block';
 
         passwordShown = true;
     } else {
-<<<<<<< HEAD
         // Redirect to frontpage (simulate login success)
-=======
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
         window.location.href = 'frontpage.html';
     }
 });
 
-<<<<<<< HEAD
 // Back arrow click
 backArrow.addEventListener('click', () => {
     if (passwordShown) {
@@ -73,15 +50,33 @@ backArrow.addEventListener('click', () => {
 
         passwordShown = false;
     }
-=======
-backArrow.addEventListener('click', () => {
-    const passwordInput = loginBox.querySelector('input');
-    loginBox.replaceChild(usernameInput, passwordInput);
+});
+const rows = document.querySelectorAll('.products-row, .product-row');
 
-    orContinue.style.display = 'block';
-    altLogin.style.display = 'flex';
-    backArrow.style.display = 'none';
+rows.forEach(row => {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-    passwordShown = false;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
+  row.addEventListener('mousedown', e => {
+    isDown = true;
+    row.classList.add('active');
+    startX = e.pageX - row.offsetLeft;
+    scrollLeft = row.scrollLeft;
+  });
+  row.addEventListener('mouseleave', () => {
+    isDown = false;
+    row.classList.remove('active');
+  });
+  row.addEventListener('mouseup', () => {
+    isDown = false;
+    row.classList.remove('active');
+  });
+  row.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - row.offsetLeft;
+    const walk = (x - startX) * 2; // scroll speed
+    row.scrollLeft = scrollLeft - walk;
+  });
 });

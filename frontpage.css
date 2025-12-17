@@ -2,30 +2,24 @@
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-<<<<<<< HEAD
     background-color: #f5f5f5;
-=======
     background-image: url("images/loginformbackground.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
 }
 
 /* ----- HEADER ----- */
 .header {
-<<<<<<< HEAD
     background: white;
-=======
-     background: white;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
     height: 80px;       
     padding: 0 20px;
-
     display: flex;
     align-items: center;
     justify-content: space-between; 
-
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -36,10 +30,7 @@ body {
     height: 120px;
     width: auto;
     object-fit: contain;
-<<<<<<< HEAD
-=======
     margin-left: -10px;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 }
 
 /* ----- NAVIGATION ----- */
@@ -55,47 +46,15 @@ body {
     gap: 20px;
 }
 
-<<<<<<< HEAD
 .nav-links li {
     position: relative;
 }
 
-=======
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 .nav-links li a {
     text-decoration: none;
     color: black;
     font-size: 1rem;
-<<<<<<< HEAD
     padding: 8px 12px;
-}
-
-/* ----- DROPDOWNS ----- */
-.dropdown-menu {
-    position: absolute;
-    top: 130%;
-    left: 3px;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    list-style: none;
-    padding: 10px 0;
-    min-width: 180px;
-
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(6px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    pointer-events: none;
-}
-
-/* Profile dropdown opens to the left */
-.profile-dropdown .dropdown-menu {
-    top: 27px;
-    right: 30%;
-    left: auto;
-    margin-right: 10px;
-=======
 }
 
 /* ----- DROPDOWNS ----- */
@@ -114,7 +73,6 @@ body {
     list-style: none;
     padding: 10px 0;
     min-width: 150px;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 }
 
 .dropdown-menu li {
@@ -123,33 +81,29 @@ body {
 
 .dropdown-menu li a {
     color: black;
-<<<<<<< HEAD
     white-space: nowrap;
 }
 
-/* Keep dropdown open when hovering parent or menu */
 .dropdown:hover .dropdown-menu,
 .dropdown-menu:hover {
+    display: block;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-=======
 }
 
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-menu {
-    display: block;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
+.profile-dropdown .dropdown-menu {
+    top: 27px;
+    right: 30%;
+    left: auto;
+    margin-right: 10px;
 }
 
 /* ----- HEADER ICONS ----- */
 .header-icons {
     display: flex;
     align-items: center;
-<<<<<<< HEAD
-    gap: 15px;
-=======
     gap: 20px;
 }
 
@@ -159,16 +113,12 @@ body {
     border-radius: 5px;
     background: white;
     cursor: pointer;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 }
 
 .cart-icon {
     width: 26px;
     cursor: pointer;
-<<<<<<< HEAD
     margin-left: -5px;
-=======
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 }
 
 /* ----- HERO ----- */
@@ -190,36 +140,134 @@ body {
 
 .products-section h2 {
     margin: 0 0 20px 0;
-<<<<<<< HEAD
     text-align: center;
-=======
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
 }
 
-.products-grid {
-    display: grid;
-<<<<<<< HEAD
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* 🔥🔥 HORIZONTAL SCROLL ROW — ADDED 🔥🔥 */
+.product-row {
+    display: flex;
+    flex-wrap: nowrap;
     gap: 20px;
-    justify-items: center;
-=======
-    grid-template-columns: repeat(3, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 40px;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding-right: 120px;
+}
+.products-row, .product-row {
+    display: flex;
+    flex-wrap: nowrap;       /* never wrap cards */
+    overflow-x: auto;        /* allow horizontal scrolling */
     gap: 20px;
->>>>>>> 4c539c1b4b80a0482825985eada00a2e465b711c
+    padding: 20px 40px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* smooth on mobile */
 }
 
+.product-row::-webkit-scrollbar {
+    height: 0;
+}
+
+/* ----- PRODUCT CARD ----- */
 .product-card {
+    flex: 0 0 400px;  /* always 320px wide */
+    height: 350px;
     background: white;
     padding: 15px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Add a special class for placeholder if you want */
+.product-card.placeholder {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+}
+
+.product-card.placeholder img {
+    max-width: 100%;   /* or 90% depending on how big you want it */
+    max-height: 100%;
+    object-fit: contain;
+}
+.product-card.placeholder .product-image {
+    height: 250px; /* bigger than default 200px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.product-card.placeholder .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+.product-card .product-image {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product-card .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .product-card img {
     width: 100%;
     border-radius: 6px;
 }
+.about-section {
+    text-align: center;           /* center everything */
+    padding: 60px 20px;           /* spacing top/bottom, keep sides safe */
+    max-width: 800px;             /* so text doesn't stretch too wide */
+    margin: 0 auto;               /* center the block horizontally */
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.about-section hr {
+    width: 60px;                  /* short line under heading */
+    border: 1px solid #222;
+    margin: 0 auto 40px auto;     /* center and give space below */
+}
+
+.about-section p {
+    font-size: 1.1rem;            /* default paragraph size */
+    line-height: 1.6;
+    color: #333;
+}
+
+.about-description {
+    font-size: 0.85rem;           /* smaller than normal p */
+    max-width: 700px;             /* keeps paragraph from stretching too wide */
+    margin: 0 auto;               /* center horizontally */
+    line-height: 1.6;
+    padding: 0 15px;
+    text-align: center;           /* ensures it's centered */
+}
+.about-section h3 {
+    font-weight: normal;   /* removes bold */
+    font-family: "Segoe UI", Arial, sans-serif; /* matches body font */
+}
+
+
 
 /* ----- FOOTER ----- */
 .footer {
@@ -227,5 +275,8 @@ body {
     color: white;
     padding: 25px;
     text-align: center;
-    margin-top: 40px;
+}
+
+main {
+    flex: 1; 
 }

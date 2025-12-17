@@ -1,0 +1,161 @@
+/* ----- BASIC STYLE RESET ----- */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* ----- HEADER ----- */
+.header {
+    background: white;
+    height: 80px;       
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-icon {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ----- NAVIGATION ----- */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+/* ----- DROPDOWNS ----- */
+.dropdown-menu {
+    position: absolute;
+    top: 130%;
+    left: 3px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 10px 0;
+    min-width: 180px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    pointer-events: none;
+}
+
+/* Profile dropdown opens to the left */
+.profile-dropdown .dropdown-menu {
+    top: 27px;
+    right: 30%;
+    left: auto;
+    margin-right: 10px;
+}
+
+.dropdown-menu li {
+    padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+    color: black;
+    white-space: nowrap;
+}
+
+/* Keep dropdown open when hovering parent or menu */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ----- HEADER ICONS ----- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-icon {
+    width: 26px;
+    cursor: pointer;
+    margin-left: -5px;
+}
+
+/* ----- HERO ----- */
+.hero {
+    background: url("images/hero.jpg") center/cover no-repeat;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 2px 5px black;
+}
+
+/* ----- PRODUCTS SECTION ----- */
+.products-section {
+    padding: 40px;
+}
+
+.products-section h2 {
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.product-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* ----- FOOTER ----- */
+.footer {
+    background: #222;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    margin-top: 40px;
+}

@@ -1,4 +1,4 @@
-/* ----- BASIC STYLE RESET ----- */
+
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
@@ -12,7 +12,7 @@ body {
     min-height: 100vh; 
 }
 
-/* ----- HEADER ----- */
+/* ----- headeri----- */
 .header {
     background: white;
     height: 80px;       
@@ -33,7 +33,7 @@ body {
     margin-left: -10px;
 }
 
-/* ----- NAVIGATION ----- */
+/* ----- navigimi----- */
 .navbar {
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@ body {
     padding: 8px 12px;
 }
 
-/* ----- DROPDOWNS ----- */
+/* ----- dropdowni ----- */
 .dropdown {
     position: relative;
 }
@@ -100,7 +100,7 @@ body {
     margin-right: 10px;
 }
 
-/* ----- HEADER ICONS ----- */
+/* ----- ikonat e headerit ----- */
 .header-icons {
     display: flex;
     align-items: center;
@@ -121,7 +121,7 @@ body {
     margin-left: -5px;
 }
 
-/* ----- HERO ----- */
+/* ----- hero ----- */
 .hero {
     background: url("images/hero.jpg") center/cover no-repeat;
     height: 280px;
@@ -133,7 +133,7 @@ body {
     text-shadow: 0 2px 5px black;
 }
 
-/* ----- PRODUCTS SECTION ----- */
+/* ----- sektori produktev ----- */
 .products-section {
     padding: 40px;
 }
@@ -143,7 +143,7 @@ body {
     text-align: center;
 }
 
-/* 🔥🔥 HORIZONTAL SCROLL ROW — ADDED 🔥🔥 */
+/* scroll horozontal */
 .product-row {
     display: flex;
     flex-wrap: nowrap;
@@ -157,21 +157,21 @@ body {
 }
 .products-row, .product-row {
     display: flex;
-    flex-wrap: nowrap;       /* never wrap cards */
-    overflow-x: auto;        /* allow horizontal scrolling */
+    flex-wrap: nowrap;       
+    overflow-x: auto;        /* me leju levizjen horizontale*/
     gap: 20px;
     padding: 20px 40px;
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; /* smooth on mobile */
+    -webkit-overflow-scrolling: touch; 
 }
 
 .product-row::-webkit-scrollbar {
     height: 0;
 }
 
-/* ----- PRODUCT CARD ----- */
+/* ----- karta producteve----- */
 .product-card {
-    flex: 0 0 400px;  /* always 320px wide */
+    flex: 0 0 400px;  
     height: 350px;
     background: white;
     padding: 15px;
@@ -184,20 +184,20 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-/* Add a special class for placeholder if you want */
+/* qite ni klas speciale space hold nese don */
 .product-card.placeholder {
     display: flex;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
+    justify-content: center; /* center horizontalisht */
+    align-items: center;     /* center vertikalisht */
 }
 
 .product-card.placeholder img {
-    max-width: 100%;   /* or 90% depending on how big you want it */
+    max-width: 100%;   
     max-height: 100%;
     object-fit: contain;
 }
 .product-card.placeholder .product-image {
-    height: 250px; /* bigger than default 200px */
+    height: 250px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -231,10 +231,10 @@ body {
     border-radius: 6px;
 }
 .about-section {
-    text-align: center;           /* center everything */
-    padding: 60px 20px;           /* spacing top/bottom, keep sides safe */
-    max-width: 800px;             /* so text doesn't stretch too wide */
-    margin: 0 auto;               /* center the block horizontally */
+    text-align: center;           /* center gjithqka */
+    padding: 60px 20px;           /* vendosje hapsirav posht edhe nalt */
+    max-width: 800px;             /* mos mu zgat shum teksti */
+    margin: 0 auto;               /* fute nmidis bllokun */
 }
 
 .about-section h2 {
@@ -243,28 +243,28 @@ body {
 }
 
 .about-section hr {
-    width: 60px;                  /* short line under heading */
+    width: 60px;                  
     border: 1px solid #222;
-    margin: 0 auto 40px auto;     /* center and give space below */
+    margin: 0 auto 40px auto;     /* me shti nmes edhe me bo hapsir perfuni */
 }
 
 .about-section p {
-    font-size: 1.1rem;            /* default paragraph size */
+    font-size: 1.1rem;           
     line-height: 1.6;
     color: #333;
 }
 
 .about-description {
-    font-size: 0.85rem;           /* smaller than normal p */
-    max-width: 700px;             /* keeps paragraph from stretching too wide */
+    font-size: 0.85rem;           
+    max-width: 700px;             /* mos mu zgat paragrafi shum*/
     margin: 0 auto;               /* center horizontally */
     line-height: 1.6;
     padding: 0 15px;
-    text-align: center;           /* ensures it's centered */
+    text-align: center;           /*siguro qe osht midis/center */
 }
 .about-section h3 {
-    font-weight: normal;   /* removes bold */
-    font-family: "Segoe UI", Arial, sans-serif; /* matches body font */
+    font-weight: normal;   /* hek boldin */
+    font-family: "Segoe UI", Arial, sans-serif; /* i perngjan fontit tbodyt */
 }
 
 

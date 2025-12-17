@@ -8,16 +8,16 @@ const usernameInput = loginBox.querySelector('.username-input');
 let passwordShown = false;
 let passwordInput = null;
 
-// Next button click
+// kliko butonin next
 nextBtn.addEventListener('click', () => {
     if (!passwordShown) {
-        // Create password input once
+        // krijo inputin e passwordit veq nje her
         passwordInput = document.createElement('input');
         passwordInput.type = 'password';
         passwordInput.placeholder = 'Password';
         passwordInput.className = 'password-input';
 
-        // Copy styles from username input
+        // bone t njejt sikur te username
         const style = getComputedStyle(usernameInput);
         passwordInput.style.width = style.width;
         passwordInput.style.padding = style.padding;
@@ -25,7 +25,7 @@ nextBtn.addEventListener('click', () => {
         passwordInput.style.border = style.border;
         passwordInput.style.outline = style.outline;
 
-        // Replace username with password input
+        // ndrysho inputin e username me ato tpasswordit
         loginBox.replaceChild(passwordInput, usernameInput);
 
         orContinue.style.display = 'none';
@@ -34,12 +34,12 @@ nextBtn.addEventListener('click', () => {
 
         passwordShown = true;
     } else {
-        // Redirect to frontpage (simulate login success)
+        // tqon te frontpage (nese ki dit me shkru ishallah)
         window.location.href = 'frontpage.html';
     }
 });
 
-// Back arrow click
+// me prek shigjeten back
 backArrow.addEventListener('click', () => {
     if (passwordShown) {
         loginBox.replaceChild(usernameInput, passwordInput);
@@ -76,7 +76,7 @@ rows.forEach(row => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - row.offsetLeft;
-    const walk = (x - startX) * 2; // scroll speed
+    const walk = (x - startX) * 2; // shpejtsia e scrollit
     row.scrollLeft = scrollLeft - walk;
   });
 });
@@ -87,7 +87,7 @@ const resetBack = document.getElementById("reset-back");
 const resetSubmit = document.getElementById("reset-submit");
 const loginBoxDiv = document.querySelector(".login-box");
 
-// OPEN reset screen
+// Qele ekranin reset
 forgotBtn.addEventListener("click", () => {
     loginBoxDiv.style.display = "none";
     resetBox.style.display = "flex";

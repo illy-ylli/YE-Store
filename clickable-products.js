@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const productCards = document.querySelectorAll('.product-card');
 
     productCards.forEach(card => {
-        card.style.cursor = 'pointer'; // Show pointer on hover
+        card.style.cursor = 'pointer';
 
         card.addEventListener('click', () => {
             const imgElement = card.querySelector('img');
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = nameElement ? nameElement.textContent : '';
             const price = priceElement ? priceElement.textContent : '';
 
-            // Navigate to product detail page with query parameters
+            // drrejtohu te faqja e produktit me parametra query
             const url = `product.html?image=${encodeURIComponent(image)}&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`;
             window.location.href = url;
         });

@@ -80,3 +80,22 @@ rows.forEach(row => {
     row.scrollLeft = scrollLeft - walk;
   });
 });
+const forgotBtn = document.querySelector(".forgot");
+const resetBox = document.getElementById("reset-box");
+const resetBack = document.getElementById("reset-back");
+const resetSubmit = document.getElementById("reset-submit");
+
+forgotBtn.addEventListener("click", () =>{
+  loginBox.style.display = "none";
+  resetBox.style.display = "flex";
+});
+
+resetBack.addEventListener("click", () => {
+  let email = document.getElementById("reset-email").value;
+
+  if(!email.includes("@")) {
+    alert("Please enter a valid email address");
+  } else {
+        alert("A reset link has been sent to: " + email);
+  }
+});

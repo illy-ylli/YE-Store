@@ -15,7 +15,7 @@
     <!-- Username input -->
     <input type="text" placeholder="Username" class="username-input">
 
-    <p class="forgot">Forgot password?</p>
+    <p class="forgot" id="forgot-btn">Forgot password?</p>
     <button class="next-btn">Next</button>
     <p class="or-continue">or continue with</p>
 
@@ -38,7 +38,12 @@
         </button>
     </div>
 </div>
-
+<div class="reset-box" id="reset-box" style="display:none;">
+    <h2>Reset Password</h2>
+    <input type="email" id="reset-email" placeholder="Enter your email">
+    <button id="reset-submit">Send reset link</button>
+    <p id="reset-back" style="cursor:pointer;">Back</p>
+</div>
 <script src="script.js"></script>
 </body>
 </html>

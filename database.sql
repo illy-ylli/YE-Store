@@ -79,4 +79,21 @@ CREATE TABLE cart (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
     UNIQUE KEY unique_cart_item (user_id, product_id)
 );
+-- sllajderat
+CREATE TABLE sliders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    description TEXT,
+    image_path VARCHAR(255) NOT NULL,
+    link VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_is_active (is_active)
+);
 
+
+-- mbrenda kategorive filtrimi
+INSERT INTO categories (name, slug) VALUES 
+('Electronics', 'electronics'),
+('Home & Kitchen', 'home-kitchen'),
+('Accessories', 'accessories');

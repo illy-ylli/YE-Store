@@ -36,3 +36,16 @@ class User {
         
         return $stmt->execute();
     }
+
+      // login useri
+    public function login() {
+        $query = "SELECT id, username, email, password, role, full_name 
+                  FROM " . $this->table . " 
+                  WHERE username = :username LIMIT 1";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":username", $this->username);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);

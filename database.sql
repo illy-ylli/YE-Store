@@ -113,3 +113,19 @@ Our UPS-certified shipping guarantees reliable delivery, and we constantly monit
 Customer support is available around the clock, and we take feedback seriously to continuously improve our services. 
 At Y/E Store, we combine youthful energy, modern technology, and professional dedication to make online shopping simple, safe, and enjoyable for everyone. 
 Whether you''re a first-time buyer or a seasoned online shopper, we aim to exceed expectations in both service and convenience.');
+
+-- Produktet elektronike
+INSERT INTO products (name, description, price, image_path, category_id, is_top_product, is_new_arrival) VALUES
+('Logitech G PRO X Superlight 2', 'Wireless gaming mouse with ultra-lightweight design', 79.99, 'mouse.png', 1, TRUE, FALSE),
+('UMax 22 Touch - 22 Inch Portable Monitor', 'Portable touchscreen monitor for work and entertainment', 263.99, 'monitor.png', 1, FALSE, TRUE),
+('Amazon Kindle Paperwhite', 'Waterproof e-reader with built-in light', 189.99, 'ereader.png', 1, FALSE, TRUE),
+('Ray-Ban Meta (Gen 1)', 'Smart glasses with camera and speakers', 224.99, 'glasses.png', 1, FALSE, TRUE),
+('Amazon Fire TV Stick 4K Plus', 'Streaming device with 4K support', 29.99, 'amazon.png', 1, TRUE, FALSE);
+
+-- Produktet Home&Kitchen
+INSERT INTO products (name, description, price, image_path, category_id, is_top_product, is_new_arrival) VALUES
+('COSORI Air Fryer Pro', 'Digital air fryer with multiple cooking functions', 89.99, 'airfrier.png', 2, TRUE, TRUE);
+
+-- Produktet accessories
+INSERT INTO products (name, description, price, image_path, category_id, is_top_product, is_new_arrival) VALUES
+('Lenovo Laptop Bag T210 Fabric', 'Durable laptop bag with multiple compartments', 15.99, 'laptopbag.png', 3, TRUE, FALSE);

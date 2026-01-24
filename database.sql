@@ -97,3 +97,19 @@ INSERT INTO categories (name, slug) VALUES
 ('Electronics', 'electronics'),
 ('Home & Kitchen', 'home-kitchen'),
 ('Accessories', 'accessories');
+
+-- Admin user (password: admin123 - hashed)
+INSERT INTO users (username, email, password, full_name, role) VALUES 
+('admin', 'admin@ye-store.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'System Administrator', 'admin');
+
+-- Kontenti about us
+INSERT INTO about_content (title, subtitle, main_content) VALUES 
+('About Us',
+'Y/E Store is an easily accessible, reliable, and UPS-certified shipping website created by two ambitious 19-year-olds, dedicated to bringing you the best online shopping experience.',
+'Y/E Store is a fully user-focused online shopping platform, founded and managed by two driven 19-year-olds with a shared vision of revolutionizing e-commerce. 
+Our platform is designed to be intuitive, responsive, and secure, ensuring that every interaction you have is seamless. 
+We carefully curate our products, ranging from electronics and home essentials to unique lifestyle items, maintaining quality while keeping prices competitive. 
+Our UPS-certified shipping guarantees reliable delivery, and we constantly monitor order tracking to ensure you always know where your package is. 
+Customer support is available around the clock, and we take feedback seriously to continuously improve our services. 
+At Y/E Store, we combine youthful energy, modern technology, and professional dedication to make online shopping simple, safe, and enjoyable for everyone. 
+Whether you''re a first-time buyer or a seasoned online shopper, we aim to exceed expectations in both service and convenience.');

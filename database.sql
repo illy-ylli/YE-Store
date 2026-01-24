@@ -129,3 +129,13 @@ INSERT INTO products (name, description, price, image_path, category_id, is_top_
 -- Produktet accessories
 INSERT INTO products (name, description, price, image_path, category_id, is_top_product, is_new_arrival) VALUES
 ('Lenovo Laptop Bag T210 Fabric', 'Durable laptop bag with multiple compartments', 15.99, 'laptopbag.png', 3, TRUE, FALSE);
+
+-- sliders per homepage
+INSERT INTO sliders (title, description, image_path, link) VALUES
+('Welcome to Y/E Store', 'Discover the latest products at the best prices', 'hero.jpg', 'frontpage.php'),
+('New Arrivals', 'Check out our latest products', 'newarrivals.jpg', 'frontpage.php#new-arrivals'),
+('Top Products', 'Best sellers this month', 'topproducts.jpg', 'frontpage.php#top-products');
+
+-- testus user (password: user123)
+INSERT INTO users (username, email, password, full_name, country, role) VALUES 
+('filon', 'filoni67@example.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'Filon Fisteki', 'Kosovo', 'user');

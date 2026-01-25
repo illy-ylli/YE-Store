@@ -8,17 +8,26 @@
 </head>
 <body>
 
-<div class="login-box">
-    <img src="images/back.png" class="back-arrow" alt="Back">
-    <h2>Sign in</h2>
-
+<!-- LOGIN FORM -->
+<div class="login-box" id="loginBox">
+    <h2 class="form-title">Sign In</h2>
+    
+    <!-- Error message for login -->
+    <div class="error-message" id="loginError"></div>
+    
     <!-- Username input -->
-    <input type="text" placeholder="Username" class="username-input">
-
+    <input type="text" placeholder="Username or Email" class="username-input" id="loginUsername">
+    
+    <!-- Password input -->
+    <input type="password" placeholder="Password" class="password-input" id="loginPassword">
+    
     <p class="forgot" id="forgot-btn">Forgot password?</p>
-    <button class="next-btn">Next</button>
+    <button class="next-btn" id="loginBtn">Sign In</button>
+    
+    <p class="switch-link" id="showRegister">Don't have an account? Sign Up</p>
+    
     <p class="or-continue">or continue with</p>
-
+    
     <div class="alt-login">
         <button class="gsi-material-button">
             <div class="gsi-material-button-state"></div>
@@ -38,18 +47,49 @@
         </button>
     </div>
 </div>
+
+<!-- REGISTER FORM -->
+<div class="login-box register-box" id="registerBox">
+    <h2 class="form-title">Create Account</h2>
+    
+    <!-- Error message for registration -->
+    <div class="error-message" id="registerError"></div>
+    
+    <!-- Success message for registration -->
+    <div class="success-message" id="registerSuccess"></div>
+    
+    <!-- Registration inputs -->
+    <input type="text" placeholder="Username" class="username-input" id="regUsername">
+    <input type="email" placeholder="Email Address" class="username-input" id="regEmail">
+    <input type="password" placeholder="Password" class="password-input" id="regPassword">
+    <input type="text" placeholder="Full Name (Optional)" class="username-input" id="regFullName">
+    
+    <select class="country-select" id="regCountry">
+        <option value="Kosovo">Kosovo</option>
+        <option value="Albania">Albania</option>
+        <option value="Other">Other</option>
+    </select>
+    
+    <button class="next-btn" id="registerBtn">Create Account</button>
+    
+    <p class="switch-link" id="showLogin">Already have an account? Sign In</p>
+</div>
+
+<!-- Reset Password Box -->
 <div class="reset-box" id="reset-box" style="display:none;">
     <h2>Reset Password</h2>
     <input type="email" id="reset-email" placeholder="Enter your email">
     <button id="reset-submit">Send reset link</button>
     <p id="reset-back" style="cursor:pointer;">Back</p>
 </div>
+
 <div id="reset-popup" style="display:none;" class="popup-reset">
     <div class="popup-content">
         <p>Reset link sent!</p>
         <button id="popup-ok">OK</button>
     </div>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>

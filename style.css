@@ -24,7 +24,6 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +32,11 @@ body {
     padding: 20px 0;
     gap: 6px;
 }
+
+.register-box {
+    display: none;
+}
+
 .back-arrow {
     position: absolute;
     top: 10px;
@@ -51,6 +55,15 @@ body {
     outline: none;
 }
 
+.password-input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    outline: none;
+    margin-top: 6px;
+}
+
 .login-box button.next-btn {
     width: 70%;
     padding: 10px;
@@ -58,6 +71,7 @@ body {
     border: 1px solid gray;
     cursor: pointer;
     background: white;
+    margin-top: 10px;
 }
 
 .login-box p {
@@ -75,7 +89,6 @@ body {
     margin: 6px 0 4px 0;
 }
 
-
 .alt-login {
     width: 100%;
     display: flex;
@@ -84,7 +97,6 @@ body {
     align-items: center;
 }
 
-
 .email-btn {
     width: 60%;
     padding: 6px;
@@ -92,7 +104,6 @@ body {
     background: white;
     border: 1px solid #ccc;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,64 +128,65 @@ body {
     border-radius: 5px;      
     border: 1px solid gray;    
     padding: 0 10px;
-  background-color: WHITE;
-  background-image: none;
-  border: 1px solid #747775;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #1f1f1f;
-  cursor: pointer;
-  font-family: 'Roboto', arial, sans-serif;
-  font-size: 0.8rem;
-  height: 40px;
-  letter-spacing: 0.25px;
-  outline: none;
-  overflow: hidden;
-  padding: 0 12px;
-  position: relative;
-  text-align: center;
-  transition: background-color .218s, border-color .218s, box-shadow .218s;
-  width: 60%;      
-  font-family: "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    background-color: WHITE;
+    background-image: none;
+    border: 1px solid #747775;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    cursor: pointer;
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 0.8rem;
+    height: 40px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 12px;
+    position: relative;
+    text-align: center;
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    width: 60%;      
+    font-family: "Segoe UI", Inter, Helvetica, Arial, sans-serif;
 }
 
 .gsi-material-button .gsi-material-button-icon {
-  height: 18px;
-  margin-right: 6px;
-  width: 16px;
+    height: 18px;
+    margin-right: 6px;
+    width: 16px;
 }
 
 .gsi-material-button .gsi-material-button-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100%;
-  gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    gap: 4px;
 }
 
 .gsi-material-button .gsi-material-button-contents {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .gsi-material-button:hover {
-  box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
 }
 
 .gsi-material-button-state {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: opacity .218s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity .218s;
 }
 
 .gsi-material-button:disabled {
-  cursor: default;
-  background-color: #ffffff61;
-  border-color: #1f1f1f1f;
+    cursor: default;
+    background-color: #ffffff61;
+    border-color: #1f1f1f1f;
 }
+
 /* Password reset box */
 .reset-box {
     width: 300px;
@@ -185,7 +197,6 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -195,7 +206,7 @@ body {
     gap: 10px;
 }
 
-/* Inputat brenda reset box */
+/* Inputs inside reset box */
 .reset-box input {
     width: 70%;
     padding: 10px;
@@ -204,7 +215,7 @@ body {
     outline: none;
 }
 
-/* Butoni Send */
+/* Send button */
 #reset-submit {
     width: 70%;
     padding: 10px;
@@ -215,7 +226,7 @@ body {
     font-family: "Segoe UI";
 }
 
-/* Back teksti */
+/* Back text */
 #reset-back {
     font-size: 0.8rem;
     color: gray;
@@ -223,7 +234,7 @@ body {
     margin: 0;
 }
 
-/* Popup ui */
+/* Popup UI */
 .popup-reset {
     position: fixed;
     top: 0;
@@ -236,7 +247,7 @@ body {
     justify-content: center;
 }
 
-/* Lajmrimi/pop up*/
+/* Notification popup */
 .popup-content {
     background: white;
     padding: 20px 30px;
@@ -247,7 +258,7 @@ body {
     width: 250px;
 }
 
-/* Lajmrimi ok */
+/* Popup OK button */
 .popup-content button {
     margin-top: 10px;
     width: 80%;
@@ -256,4 +267,65 @@ body {
     border-radius: 20px;
     border: 1px solid gray;
     background: white;
+}
+
+/* Form title */
+.form-title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Country select */
+.country-select {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    outline: none;
+    font-family: "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    background: white;
+    margin-top: 6px;
+}
+
+/* Switch link between forms */
+.switch-link {
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.switch-link:hover {
+    text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+    color: #dc3545;
+    background: #f8d7da;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    width: 70%;
+    text-align: center;
+    display: none;
+    border: 1px solid #f5c6cb;
+}
+
+/* Success message styling */
+.success-message {
+    color: #155724;
+    background: #d4edda;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    width: 70%;
+    text-align: center;
+    display: none;
+    border: 1px solid #c3e6cb;
 }

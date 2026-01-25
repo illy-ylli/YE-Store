@@ -44,7 +44,7 @@ body {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    display: none; /* hidden initially */
+    display: none; /* e mshefun niher */
 }
 
 .login-box input {
@@ -187,7 +187,7 @@ body {
     border-color: #1f1f1f1f;
 }
 
-/* Password reset box */
+/* Pass reset boxi */
 .reset-box {
     width: 300px;
     background-color: white;
@@ -206,7 +206,7 @@ body {
     gap: 10px;
 }
 
-/* Inputs inside reset box */
+/* Inputat brenda reset boxit*/
 .reset-box input {
     width: 70%;
     padding: 10px;
@@ -215,7 +215,7 @@ body {
     outline: none;
 }
 
-/* Send button */
+/* butoni send */
 #reset-submit {
     width: 70%;
     padding: 10px;
@@ -226,7 +226,7 @@ body {
     font-family: "Segoe UI";
 }
 
-/* Back text */
+/* teksti back */
 #reset-back {
     font-size: 0.8rem;
     color: gray;
@@ -247,7 +247,7 @@ body {
     justify-content: center;
 }
 
-/* Notification popup */
+/* popupi lajmrimit */
 .popup-content {
     background: white;
     padding: 20px 30px;
@@ -258,7 +258,7 @@ body {
     width: 250px;
 }
 
-/* Popup OK button */
+/* Popup OK butoni */
 .popup-content button {
     margin-top: 10px;
     width: 80%;
@@ -269,7 +269,7 @@ body {
     background: white;
 }
 
-/* Form title */
+/* titulli i forms */
 .form-title {
     margin-bottom: 20px;
     text-align: center;
@@ -277,7 +277,7 @@ body {
     color: #333;
 }
 
-/* Country select */
+/* zgjidhja e shtetit */
 .country-select {
     width: 70%;
     padding: 10px;
@@ -289,7 +289,7 @@ body {
     margin-top: 6px;
 }
 
-/* Switch link between forms */
+/* ndrrimi i linqev mes forms */
 .switch-link {
     color: #007bff;
     cursor: pointer;
@@ -302,7 +302,7 @@ body {
     text-decoration: underline;
 }
 
-/* Error message styling */
+/* stilimi i error mesazhit */
 .error-message {
     color: #dc3545;
     background: #f8d7da;
@@ -316,7 +316,7 @@ body {
     border: 1px solid #f5c6cb;
 }
 
-/* Success message styling */
+/* stilimi i mesazhit sukses */
 .success-message {
     color: #155724;
     background: #d4edda;

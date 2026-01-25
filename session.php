@@ -25,3 +25,17 @@ class SessionManager {
     public static function logout() {
         session_destroy();
     }
+     // merr data t userit
+    public static function getUser() {
+        if (self::isLoggedIn()) {
+            return [
+                'id' => $_SESSION['user_id'],
+                'username' => $_SESSION['username'],
+                'email' => $_SESSION['email'],
+                'role' => $_SESSION['role']
+            ];
+        }
+        return null;
+    }
+}
+?>

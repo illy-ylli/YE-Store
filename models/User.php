@@ -21,4 +21,16 @@ class User {
         return false;
     }
     
-  
+    public function register($data) {
+        // kontrrollo nese useri ekziston
+        $sql = "SELECT id FROM users WHERE username = :username OR email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':username' => $data['username'],
+            ':email' => $data['email']
+        ]);
+        
+        if ($stmt->rowCount() > 0) {
+            return ['success' => false, 'message' => 'Username or email already exists'];
+        }
+        

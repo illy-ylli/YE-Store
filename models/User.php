@@ -33,4 +33,26 @@ class User {
         if ($stmt->rowCount() > 0) {
             return ['success' => false, 'message' => 'Username or email already exists'];
         }
+                // passwordi ne hashtag
+        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
         
+        // Inserto user ne databaz
+        $sql = "INSERT INTO users (username, email, password, full_name, country, role) 
+                VALUES (:username, :email, :password, :full_name, :country, 'user')";
+        
+        $stmt = $this->conn->prepare($sql);
+        $success = $stmt->execute([
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':password' => $hashedPassword,
+            ':full_name' => $data['full_name'] ?? '',
+            ':country' => $data['country'] ?? 'Kosovo'
+        ]);
+        
+        return [
+            'success' => $success,
+            'message' => $success ? 'Registration successful' : 'Registration failed'
+        ];
+    }
+}
+?>

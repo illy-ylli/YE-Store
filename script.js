@@ -41,29 +41,34 @@ loginBtn.addEventListener('click', (e) => {
         return;
     }
     
-    // kerko per admin log
-    if (username === 'admin' && password === 'admin123') {
-        alert('Login successful! Redirecting to admin panel...');
-
-        window.location.href = 'frontpage.html';
-
-        window.location.href = 'frontpage.php';
-        return;
-    }
-    
-    // kerko per test user
-    if (username === 'filon' && password === 'user123') {
-        alert('Login successful! Redirecting to store...');
-
-        window.location.href = 'frontpage.html';
-
-        window.location.href = 'frontpage.php';
-        return;
-    }
-    
-    // nese te dhenat nuk jan te sakta
-    loginError.textContent = 'Invalid username/email or password.';
-    loginError.style.display = 'block';
+    // dergo te dhenat ne server me AJAX per te vendosur session
+    fetch('ajax_login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            if (data.role === 'admin') {
+                alert('Login successful! Redirecting to admin panel...');
+                window.location.href = 'admin_dashboard.php';
+            } else {
+                alert('Login successful! Redirecting to store...');
+                window.location.href = 'frontpage.php';
+            }
+        } else {
+            loginError.textContent = data.message || 'Invalid username/email or password.';
+            loginError.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        loginError.textContent = 'Login failed. Please try again.';
+        loginError.style.display = 'block';
+    });
 });
 
 

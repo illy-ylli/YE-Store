@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const price = priceElement ? priceElement.textContent : '';
 
             // drrejtohu te faqja e produktit me parametra query
+
+            const url = `product.html?image=${encodeURIComponent(image)}&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`;
+
             const url = `product.php?image=${encodeURIComponent(image)}&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`;
             window.location.href = url;
         });

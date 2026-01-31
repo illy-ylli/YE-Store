@@ -1,3 +1,28 @@
+<?php
+require_once 'config/Database.php';
+
+// 3.3: handle form submission
+$successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $message = $_POST['message'] ?? '';
+
+    $db = new Database();$conn = $db->getConnection();
+
+    $stmt = $conn->prepare("
+        INSERT INTO support_messages (name, email, message) 
+        VALUES (?, ?, ?)
+    ");
+    $stmt->execute([$name, $email, $message]);
+
+    if ($stmt->rowCount() > 0) {
+        $successMessage = "Message sent successfully!";
+    } else {
+        $successMessage = "Something went wrong. Please try again.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,10 +78,16 @@
         .support-form button:hover {
             background-color: #444;
         }
+
+        .success-msg {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <main>
+<main>
 <div class="page-content">
     <!-- HEADER -->
     <header class="header">
@@ -104,15 +135,19 @@
     <!-- SUPPORT SECTION -->
     <main class="support-section">
         <img src="images/support.png" alt="Customer Support">
-        <form class="support-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Write your message..." rows="6" required></textarea>
+        <form class="support-form" method="POST" action="support.php">
+            <?php if($successMessage): ?>
+                <div class="success-msg"><?= htmlspecialchars($successMessage) ?></div>
+            <?php endif; ?>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Write your message..." rows="6" required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </main>
 </div>
 </main>
+
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">

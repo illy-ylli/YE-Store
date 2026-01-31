@@ -14,6 +14,11 @@ body {
 .logo {
     width: 300px;
 }
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .login-box {
     width: 300px;

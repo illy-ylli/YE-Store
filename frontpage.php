@@ -64,8 +64,9 @@
 <section class="products-section">
     <h2>Top Products</h2>
     <div class="product-row">
-        <div class="product-card">
-            <a href="product.php?id=1">
+
+        <a href="product.php?id=1" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/mouse.png" alt="Logitech G PRO X Superlight 2">
                 </div>
@@ -73,11 +74,11 @@
                     <h3>Logitech G PRO X Superlight 2</h3>
                     <p>$79.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
-        <div class="product-card">
-            <a href="product.php?id=2">
+        <a href="product.php?id=2" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/laptopbag.png" alt="Lenovo Laptop Bag T210 Fabric">
                 </div>
@@ -85,11 +86,11 @@
                     <h3>Lenovo Laptop Bag T210 Fabric</h3>
                     <p>$15.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
-        <div class="product-card">
-            <a href="product.php?id=3">
+        <a href="product.php?id=3" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/amazon.png" alt="Amazon Fire TV Stick 4K Plus">
                 </div>
@@ -97,23 +98,26 @@
                     <h3>Amazon Fire TV Stick 4K Plus</h3>
                     <p>$29.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
         <div class="product-card placeholder">
             <div class="product-image">
                 <img src="images/nothinghere.png" alt="Nothing Here">
             </div>
         </div>
+
     </div>
 </section>
+
 
 <!-- NEW ARRIVALS -->
 <section class="products-section">
     <h2>New Arrivals</h2>
     <div class="product-row">
-        <div class="product-card">
-            <a href="product.php?id=4">
+
+        <a href="product.php?id=4" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/airfrier.png" alt="COSORI Air Fryer Pro">
                 </div>
@@ -121,11 +125,11 @@
                     <h3>COSORI Air Fryer Pro</h3>
                     <p>$89.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
-        <div class="product-card">
-            <a href="product.php?id=5">
+        <a href="product.php?id=5" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/monitor.png" alt="UMax 22 Touch - 22 Inch Portable Monitor">
                 </div>
@@ -133,11 +137,11 @@
                     <h3>UMax 22 Touch - 22 Inch Portable Monitor</h3>
                     <p>$263.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
-        <div class="product-card">
-            <a href="product.php?id=6">
+        <a href="product.php?id=6" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/ereader.png" alt="Amazon Kindle Paperwhite">
                 </div>
@@ -145,11 +149,11 @@
                     <h3>Amazon Kindle Paperwhite</h3>
                     <p>$189.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
-        <div class="product-card">
-            <a href="product.php?id=7">
+        <a href="product.php?id=7" class="product-link">
+            <div class="product-card">
                 <div class="product-image">
                     <img src="images/glasses.png" alt="Ray-Ban Meta (Gen 1)">
                 </div>
@@ -157,10 +161,12 @@
                     <h3>Ray-Ban Meta (Gen 1)</h3>
                     <p>$224.99</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
+
     </div>
 </section>
+
 
 
     </main>

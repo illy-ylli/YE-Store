@@ -280,9 +280,21 @@ body {
 main {
     flex: 1; 
 }
+
+
 /* frontpage.css */
 .product-card a {
     text-decoration: none; /* remove underline */
     color: inherit; /* keep normal text color */
     display: block; /* make the whole card clickable */
 }
+.product-link {
+    display: block;
+    width: 100%;
+}
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+

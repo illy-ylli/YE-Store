@@ -44,6 +44,9 @@ loginBtn.addEventListener('click', (e) => {
     // kerko per admin log
     if (username === 'admin' && password === 'admin123') {
         alert('Login successful! Redirecting to admin panel...');
+
+        window.location.href = 'frontpage.html';
+
         window.location.href = 'frontpage.php';
         return;
     }
@@ -51,6 +54,9 @@ loginBtn.addEventListener('click', (e) => {
     // kerko per test user
     if (username === 'filon' && password === 'user123') {
         alert('Login successful! Redirecting to store...');
+
+        window.location.href = 'frontpage.html';
+
         window.location.href = 'frontpage.php';
         return;
     }

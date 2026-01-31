@@ -1,0 +1,288 @@
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f5f5f5;
+    background-image: url("images/loginformbackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+/* ----- headeri----- */
+.header {
+    background: white;
+    height: 80px;       
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-icon {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+    margin-left: -10px;
+}
+
+/* ----- navigimi----- */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+/* ----- dropdowni ----- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    min-width: 150px;
+}
+
+.dropdown-menu li {
+    padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+    color: black;
+    white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.profile-dropdown .dropdown-menu {
+    top: 27px;
+    right: 30%;
+    left: auto;
+    margin-right: 10px;
+}
+
+/* ----- ikonat e headerit ----- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-btn {
+    padding: 6px 12px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.cart-icon {
+    width: 26px;
+    cursor: pointer;
+    margin-left: -5px;
+}
+
+/* ----- hero ----- */
+.hero {
+    background: url("images/hero.jpg") center/cover no-repeat;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 2px 5px black;
+}
+
+/* ----- sektori produktev ----- */
+.products-section {
+    padding: 40px;
+}
+
+.products-section h2 {
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+/* scroll horozontal */
+.product-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 40px;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding-right: 120px;
+}
+.products-row, .product-row {
+    display: flex;
+    flex-wrap: nowrap;       
+    overflow-x: auto;        /* me leju levizjen horizontale*/
+    gap: 20px;
+    padding: 20px 40px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; 
+}
+
+.product-row::-webkit-scrollbar {
+    height: 0;
+}
+
+/* ----- karta producteve----- */
+.product-card {
+    flex: 0 0 400px;  
+    height: 350px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+/* qite ni klas speciale space hold nese don */
+.product-card.placeholder {
+    display: flex;
+    justify-content: center; /* center horizontalisht */
+    align-items: center;     /* center vertikalisht */
+}
+
+.product-card.placeholder img {
+    max-width: 100%;   
+    max-height: 100%;
+    object-fit: contain;
+}
+.product-card.placeholder .product-image {
+    height: 250px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.product-card.placeholder .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+.product-card .product-image {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product-card .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+.about-section {
+    text-align: center;           /* center gjithqka */
+    padding: 60px 20px;           /* vendosje hapsirav posht edhe nalt */
+    max-width: 800px;             /* mos mu zgat shum teksti */
+    margin: 0 auto;               /* fute nmidis bllokun */
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.about-section hr {
+    width: 60px;                  
+    border: 1px solid #222;
+    margin: 0 auto 40px auto;     /* me shti nmes edhe me bo hapsir perfuni */
+}
+
+.about-section p {
+    font-size: 1.1rem;           
+    line-height: 1.6;
+    color: #333;
+}
+
+.about-description {
+    font-size: 0.85rem;           
+    max-width: 700px;             /* mos mu zgat paragrafi shum*/
+    margin: 0 auto;               /* center horizontally */
+    line-height: 1.6;
+    padding: 0 15px;
+    text-align: center;           /*siguro qe osht midis/center */
+}
+.about-section h3 {
+    font-weight: normal;   /* hek boldin */
+    font-family: "Segoe UI", Arial, sans-serif; /* i perngjan fontit tbodyt */
+}
+
+
+
+/* ----- FOOTER ----- */
+.footer {
+    background: #222;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+main {
+    flex: 1; 
+}
+/* frontpage.css */
+.product-card a {
+    text-decoration: none; /* remove underline */
+    color: inherit; /* keep normal text color */
+    display: block; /* make the whole card clickable */
+}

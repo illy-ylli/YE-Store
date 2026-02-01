@@ -126,3 +126,89 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
         </div>
     </div>
     
+    <!-- sektori i produktev -->
+    <h2 id="products">Products</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Created By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($products as $p): ?>
+            <tr>
+                <td><?= htmlspecialchars($p['id']) ?></td>
+                <td><?= htmlspecialchars($p['name']) ?></td>
+                <td>$<?= number_format($p['price'], 2) ?></td>
+                <td><img src="images/<?= htmlspecialchars($p['image_path']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" style="width:50px; height:50px; object-fit:contain;"></td>
+                <td><?= htmlspecialchars($p['created_by'] ?? 'Unknown') ?></td>
+                <td>
+                    <button class="action-btn" onclick="editProduct(<?= $p['id'] ?>)">Edit</button>
+                    <button class="action-btn delete-btn" onclick="deleteProduct(<?= $p['id'] ?>)">Delete</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+    <!-- sektori i support mesazhev -->
+    <h2 id="messages">Support Messages (<?= $unreadMessages ?> unread)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Received At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($supportMessages as $m): ?>
+            <tr class="<?= $m['is_read'] ? '' : 'unread' ?>">
+                <td><?= htmlspecialchars($m['id']) ?></td>
+                <td><?= htmlspecialchars($m['name']) ?></td>
+                <td><?= htmlspecialchars($m['email']) ?></td>
+                <td><?= nl2br(htmlspecialchars(substr($m['message'], 0, 100) . (strlen($m['message']) > 100 ? '...' : ''))) ?></td>
+                <td><?= $m['is_read'] ? 'Read' : 'Unread' ?></td>
+                <td><?= htmlspecialchars($m['created_at']) ?></td>
+                <td>
+                    <?php if(!$m['is_read']): ?>
+                    <a href="?mark_read=<?= $m['id'] ?>" class="action-btn read-btn">Mark Read</a>
+                    <?php endif; ?>
+                    <button class="action-btn delete-btn" onclick="deleteMessage(<?= $m['id'] ?>)">Delete</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</main>
+
+<script>
+function editProduct(id) {
+    if(confirm('Edit product #' + id + '?')) {
+        alert('Edit functionality would open here for product #' + id);
+    }
+}
+
+function deleteProduct(id) {
+    if(confirm('Are you sure you want to delete product #' + id + '?')) {
+        window.location.href = 'admin_delete_product.php?id=' + id;
+    }
+}
+
+function deleteMessage(id) {
+    if(confirm('Delete message #' + id + '?')) {
+        window.location.href = 'admin_delete_message.php?id=' + id;
+    }
+}
+</script>
+</body>
+</html>

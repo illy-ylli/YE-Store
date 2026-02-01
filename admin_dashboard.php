@@ -39,3 +39,51 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
     header("Location: admin_dashboard.php");
     exit;
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Y/E Store</title>
+<link rel="stylesheet" href="frontpage.css">
+<style>
+    body { font-family: Arial, sans-serif; }
+    h2 { margin-top: 30px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #222; color: white; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    .stats-container { display: flex; gap: 20px; margin: 20px 0; }
+    .stat-box { 
+        background: white; 
+        padding: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        flex: 1;
+        text-align: center;
+    }
+    .stat-box h3 { margin: 0; color: #666; }
+    .stat-box .number { font-size: 2em; font-weight: bold; margin: 10px 0; }
+    .unread { background-color: #fff3cd !important; }
+    .action-btn { 
+        padding: 5px 10px; 
+        margin: 2px; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 0.9em;
+    }
+    .read-btn { background: #28a745; color: white; }
+    .delete-btn { background: #dc3545; color: white; }
+    .admin-nav { margin: 20px 0; }
+    .admin-nav a { 
+        margin-right: 15px; 
+        padding: 8px 15px; 
+        background: #222; 
+        color: white; 
+        text-decoration: none;
+        border-radius: 4px;
+    }
+</style>
+</head>

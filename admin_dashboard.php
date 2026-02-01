@@ -94,8 +94,6 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
     </div>
     <nav>
         <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span> |
-        <a href="frontpage.php">View Store</a> |
-        <a href="profile.php">Profile</a> |
         <a href="index.php">Logout</a>
     </nav>
 </header>

@@ -87,3 +87,42 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
     }
 </style>
 </head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="frontpage.php"><img src="images/Logo.png" class="logo-icon" alt="Logo"></a>
+    </div>
+    <nav>
+        <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span> |
+        <a href="frontpage.php">View Store</a> |
+        <a href="profile.php">Profile</a> |
+        <a href="index.php">Logout</a>
+    </nav>
+</header>
+
+<main style="padding: 20px;">
+    <h1>Admin Dashboard</h1>
+    
+    <div class="admin-nav">
+        <a href="admin_add_product.php">Add New Product</a>
+        <a href="#products">Products</a>
+        <a href="#messages">Support Messages</a>
+    </div>
+    
+    <!-- Statistikat -->
+    <div class="stats-container">
+        <div class="stat-box">
+            <h3>Total Products</h3>
+            <div class="number"><?= $totalProducts ?></div>
+        </div>
+        <div class="stat-box">
+            <h3>Total Users</h3>
+            <div class="number"><?= $totalUsers ?></div>
+        </div>
+        <div class="stat-box">
+            <h3>Support Messages</h3>
+            <div class="number"><?= $totalMessages ?></div>
+            <small><?= $unreadMessages ?> unread</small>
+        </div>
+    </div>
+    

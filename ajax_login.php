@@ -8,10 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    $db = new Database();
-    $conn = $db->getConnection();
-    
-    // per testim te adminit me password te koduar
+    // First check hardcoded users (for admin)
     if ($username === 'admin' && $password === 'admin123') {
         $_SESSION['user_id'] = 1;
         $_SESSION['username'] = 'admin';
@@ -25,17 +22,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-     // per testim te userit me password te koduar
-    if ($username === 'filon' && $password === 'user123') {
-        $_SESSION['user_id'] = 2;
-        $_SESSION['username'] = 'filon';
-        $_SESSION['role'] = 'user';
-        $_SESSION['email'] = 'filoni67@example.com';
+    // Then check database for other users
+    try {
+        $db = new Database();
+        $conn = $db->getConnection();
         
-        echo json_encode([
-            'success' => true,
-            'role' => 'user'
-        ]);
-        exit;
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username OR email = :username");
+        $stmt->execute([':username' => $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['email'] = $user['email'];
+            
+            echo json_encode([
+                'success' => true,
+                'role' => $user['role']
+            ]);
+            exit;
+        }
+        
+    } catch(Exception $e) {
+        // If database fails, still check hardcoded 'filon' user
+        if ($username === 'filon' && $password === 'user123') {
+            $_SESSION['user_id'] = 2;
+            $_SESSION['username'] = 'filon';
+            $_SESSION['role'] = 'user';
+            $_SESSION['email'] = 'filoni67@example.com';
+            
+            echo json_encode([
+                'success' => true,
+                'role' => 'user'
+            ]);
+            exit;
+        }
     }
-   
+    
+    echo json_encode([
+        'success' => false,
+        'message' => 'Invalid username or password'
+    ]);
+}
+?>

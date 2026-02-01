@@ -123,36 +123,44 @@ registerBtn.addEventListener('click', (e) => {
         return;
     }
     
-    
-    const userData = {
-        username: username,
-        email: email,
-        password: password,
-        fullName: fullName,
-        country: country,
-        createdAt: new Date().toISOString()
-    };
-    
-    // ruj ne localstorage per tash
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-    
-    // trego mesazhin e suksesit
-    registerSuccess.textContent = 'Account created successfully! You can now log in.';
-    registerSuccess.style.display = 'block';
-    
-    // forma e paprekur
-    regUsername.value = '';
-    regEmail.value = '';
-    regPassword.value = '';
-    regFullName.value = '';
-    regCountry.value = 'Kosovo';
-    
-    // ndrroje automatikisht ne login pas nje kohe
-    setTimeout(() => {
-        registerBox.style.display = 'none';
-        loginBox.style.display = 'flex';
-        registerSuccess.style.display = 'none';
-    }, 2000);
+    // dergo te dhenat e regjistrimit ne server per database
+    fetch('ajax_register.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&full_name=${encodeURIComponent(fullName)}&country=${encodeURIComponent(country)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // trego mesazhin e suksesit
+            registerSuccess.textContent = data.message;
+            registerSuccess.style.display = 'block';
+            
+            // forma e paprekur
+            regUsername.value = '';
+            regEmail.value = '';
+            regPassword.value = '';
+            regFullName.value = '';
+            regCountry.value = 'Kosovo';
+            
+            // ndrroje automatikisht ne login pas nje kohe
+            setTimeout(() => {
+                registerBox.style.display = 'none';
+                loginBox.style.display = 'flex';
+                registerSuccess.style.display = 'none';
+            }, 2000);
+        } else {
+            registerError.textContent = data.message;
+            registerError.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        registerError.textContent = 'Registration failed. Please try again.';
+        registerError.style.display = 'block';
+    });
 });
 
 

@@ -1,3 +1,51 @@
+<?php
+// nise session edhe lidhu me databaz
+session_start();
+require_once 'config/Database.php';
+
+$db = new Database();
+$conn = $db->getConnection();
+
+// debug moda
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// merri gjith produktet e databazes me i bo debug
+$allProducts = $conn->query("SELECT id, name, is_top_product, is_new_arrival, image_path FROM products")->fetchAll(PDO::FETCH_ASSOC);
+
+// outputi i debugit
+echo '<div style="background: #f8f9fa; padding: 15px; margin: 10px; border-radius: 5px; border: 1px solid #ddd; display: none;">';
+echo '<h3>DEBUG: All Products in Database</h3>';
+echo '<table border="1" cellpadding="5" style="font-size: 12px;">';
+echo '<tr><th>ID</th><th>Name</th><th>Top Product</th><th>New Arrival</th><th>Image</th></tr>';
+foreach ($allProducts as $p) {
+    echo '<tr>';
+    echo '<td>' . $p['id'] . '</td>';
+    echo '<td>' . htmlspecialchars($p['name']) . '</td>';
+    echo '<td>' . ($p['is_top_product'] ? '✓ YES' : '✗ NO') . '</td>';
+    echo '<td>' . ($p['is_new_arrival'] ? '✓ YES' : '✗ NO') . '</td>';
+    echo '<td>' . $p['image_path'] . '</td>';
+    echo '</tr>';
+}
+echo '</table>';
+echo '</div>';
+
+// qiti top produktet (me is_top_product = 1)
+$stmtTop = $conn->prepare("SELECT * FROM products WHERE is_top_product = 1 ORDER BY created_at DESC");
+$stmtTop->execute();
+$topProducts = $stmtTop->fetchAll(PDO::FETCH_ASSOC);
+
+// qiti produktet e reja (me is_new_arrival = 1)
+$stmtNew = $conn->prepare("SELECT * FROM products WHERE is_new_arrival = 1 ORDER BY created_at DESC");
+$stmtNew->execute();
+$newArrivals = $stmtNew->fetchAll(PDO::FETCH_ASSOC);
+
+// debug: trego numrat
+echo '<div style="background: #e9ecef; padding: 10px; margin: 10px; border-radius: 5px; display: none;">';
+echo 'Top Products found: ' . count($topProducts) . '<br>';
+echo 'New Arrivals found: ' . count($newArrivals) . '<br>';
+echo '</div>';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,124 +102,112 @@
         </nav>
     </header>
 
-    <!-- HERO BANNER -->
+    <!-- banneri -->
     <section class="hero">
         <h1>Welcome to Y/E Online Store</h1>
         <p>Discover the latest products at the best prices.</p>
     </section>
 
-    <!-- TOP PRODUCTS -->
+    <!-- top produktet -->
 <section class="products-section">
-    <h2>Top Products</h2>
+    <h2>Top Products <span style="font-size: 1rem; color: #666;"></span></h2>
     <div class="product-row">
-
-        <a href="product.php?id=1" class="product-link">
-            <div class="product-card">
+        <?php if (count($topProducts) > 0): ?>
+            <?php foreach ($topProducts as $product): ?>
+                <a href="product.php?id=<?= $product['id'] ?>" class="product-link">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <?php 
+                            $imageFile = 'images/' . $product['image_path'];
+                            if ($product['image_path'] && file_exists($imageFile)): 
+                            ?>
+                                <img src="<?= $imageFile ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                            <?php else: ?>
+                                <img src="images/default.png" alt="No Image Available">
+                            <?php endif; ?>
+                        </div>
+                        <div class="product-footer">
+                            <h3><?= htmlspecialchars($product['name']) ?></h3>
+                            <p>$<?= number_format($product['price'], 2) ?></p>
+                            <div class="product-status">
+                                <span class="status-badge top-badge">★ Top Product</span>
+                                <?php if($product['is_new_arrival']): ?>
+                                    <span class="status-badge new-badge">🆕 New Arrival</span>
+                                <?php endif; ?>
+                            </div>
+                            <small style="color: #666; font-size: 0.8rem; margin-top: 5px; display: block;">
+                                Product ID: <?= $product['id'] ?>
+                            </small>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <!-- shkruaj qe nuk ka top produkte nese ska hiq -->
+            <div class="product-card placeholder">
                 <div class="product-image">
-                    <img src="images/mouse.png" alt="Logitech G PRO X Superlight 2">
+                    <img src="images/nothinghere.png" alt="No Products Available">
                 </div>
                 <div class="product-footer">
-                    <h3>Logitech G PRO X Superlight 2</h3>
-                    <p>$79.99</p>
+                    <h3>No Top Products in Database</h3>
+                    <p>Add products via Admin Panel and check "Top Product"</p>
                 </div>
             </div>
-        </a>
-
-        <a href="product.php?id=2" class="product-link">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/laptopbag.png" alt="Lenovo Laptop Bag T210 Fabric">
-                </div>
-                <div class="product-footer">
-                    <h3>Lenovo Laptop Bag T210 Fabric</h3>
-                    <p>$15.99</p>
-                </div>
-            </div>
-        </a>
-
-        <a href="product.php?id=3" class="product-link">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/amazon.png" alt="Amazon Fire TV Stick 4K Plus">
-                </div>
-                <div class="product-footer">
-                    <h3>Amazon Fire TV Stick 4K Plus</h3>
-                    <p>$29.99</p>
-                </div>
-            </div>
-        </a>
-
-        <div class="product-card placeholder">
-            <div class="product-image">
-                <img src="images/nothinghere.png" alt="Nothing Here">
-            </div>
-        </div>
-
+        <?php endif; ?>
     </div>
 </section>
 
-
-<!-- NEW ARRIVALS -->
+<!-- produktet e reja (prej databaze) -->
 <section class="products-section">
-    <h2>New Arrivals</h2>
+    <h2>New Arrivals <span style="font-size: 1rem; color: #666;"></span></h2>
     <div class="product-row">
-
-        <a href="product.php?id=4" class="product-link">
-            <div class="product-card">
+        <?php if (count($newArrivals) > 0): ?>
+            <?php foreach ($newArrivals as $product): ?>
+                <a href="product.php?id=<?= $product['id'] ?>" class="product-link">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <?php 
+                            $imageFile = 'images/' . $product['image_path'];
+                            if ($product['image_path'] && file_exists($imageFile)): 
+                            ?>
+                                <img src="<?= $imageFile ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                            <?php else: ?>
+                                <img src="images/default.png" alt="No Image Available">
+                            <?php endif; ?>
+                        </div>
+                        <div class="product-footer">
+                            <h3><?= htmlspecialchars($product['name']) ?></h3>
+                            <p>$<?= number_format($product['price'], 2) ?></p>
+                            <div class="product-status">
+                                <?php if($product['is_top_product']): ?>
+                                    <span class="status-badge top-badge">★ Top Product</span>
+                                <?php endif; ?>
+                                <span class="status-badge new-badge">🆕 New Arrival</span>
+                            </div>
+                            <small style="color: #666; font-size: 0.8rem; margin-top: 5px; display: block;">
+                                Product ID: <?= $product['id'] ?>
+                            </small>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <!-- mesazhi nese nuk ka asnje produkt te ri -->
+            <div class="product-card placeholder">
                 <div class="product-image">
-                    <img src="images/airfrier.png" alt="COSORI Air Fryer Pro">
+                    <img src="images/nothinghere.png" alt="No Products Available">
                 </div>
                 <div class="product-footer">
-                    <h3>COSORI Air Fryer Pro</h3>
-                    <p>$89.99</p>
+                    <h3>No New Arrivals in Database</h3>
+                    <p>Add products via Admin Panel and check "New Arrival"</p>
                 </div>
             </div>
-        </a>
-
-        <a href="product.php?id=5" class="product-link">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/monitor.png" alt="UMax 22 Touch - 22 Inch Portable Monitor">
-                </div>
-                <div class="product-footer">
-                    <h3>UMax 22 Touch - 22 Inch Portable Monitor</h3>
-                    <p>$263.99</p>
-                </div>
-            </div>
-        </a>
-
-        <a href="product.php?id=6" class="product-link">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/ereader.png" alt="Amazon Kindle Paperwhite">
-                </div>
-                <div class="product-footer">
-                    <h3>Amazon Kindle Paperwhite</h3>
-                    <p>$189.99</p>
-                </div>
-            </div>
-        </a>
-
-        <a href="product.php?id=7" class="product-link">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/glasses.png" alt="Ray-Ban Meta (Gen 1)">
-                </div>
-                <div class="product-footer">
-                    <h3>Ray-Ban Meta (Gen 1)</h3>
-                    <p>$224.99</p>
-                </div>
-            </div>
-        </a>
-
+        <?php endif; ?>
     </div>
 </section>
-
-
 
     </main>
 </div>
-<script src="clickable-products.js"></script>
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">

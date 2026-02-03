@@ -7,77 +7,42 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: index.php');
     exit;
 }
+//kto tregojn nese useri mer error apo sukses
+$success = $error = '';
 
-// merru me submitin e formularit/forms
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $description = $_POST['description'] ?? '';
-    $price = $_POST['price'] ?? '';
-    $category_id = $_POST['category_id'] ?? '';
-    $image_path = $_POST['image_path'] ?? 'default.png';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
+    $name = $_POST['name'] ?? ''; //emri produktit
+    $description = $_POST['description'] ?? ''; //pershkrimi i tij
+    $price = $_POST['price'] ?? ''; //qmimi
+    $category_id = $_POST['category_id'] ?? ''; //kategoria qe i perket (elektronik, home kitchen apo accessories)
+    $is_top_product = isset($_POST['is_top_product']) ? 1 : 0; //a osht produkti top product? 1 po, 0 jo
+    $is_new_arrival = isset($_POST['is_new_arrival']) ? 1 : 0; // a osht produkti new ? 1 po, 0 jo
     
-    $db = new Database();
-    $conn = $db->getConnection();
-    
-    // inserto produktin me user_id track
-    $stmt = $conn->prepare("
-        INSERT INTO products (name, description, price, category_id, image_path, created_by) 
-        VALUES (:name, :description, :price, :category_id, :image_path, :user_id)
-    ");
-    
-    $stmt->execute([
-        ':name' => $name,
-        ':description' => $description,
-        ':price' => $price,
-        ':category_id' => $category_id,
-        ':image_path' => $image_path,
-        ':user_id' => $_SESSION['user_id']  // bone track(gjeje) kush e ka bo add
-    ]);
-    
-    $success = "Product added successfully!";
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Product - Admin</title>
-    <link rel="stylesheet" href="frontpage.css">
-</head>
-<body>
-    <header class="header">
-        <div class="logo">
-            <a href="admin_dashboard.php"><img src="images/Logo.png" alt="Logo"></a>
-        </div>
-        <nav>
-            <a href="admin_dashboard.php">Dashboard</a> |
-            <a href="index.php">Logout</a>
-        </nav>
-    </header>
-
-    <main style="padding: 20px; max-width: 600px; margin: 0 auto;">
-        <h2>Add New Product</h2>
+    // file upload
+    $image_path = 'default.png';
+    //kqyr nese osht ngarku mir fotoja
+    if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'images/'; //follderi ku ruhen fotot
+        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true); //krijo nje directory nese nuk ekziston
         
-        <?php if(isset($success)): ?>
-            <div style="color: green; margin-bottom: 15px;"><?= $success ?></div>
-        <?php endif; ?>
+        $fileExt = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION)); //shkruje file ext (png, jpeg)
         
-        <form method="POST" style="display: flex; flex-direction: column; gap: 10px;">
-            <input type="text" name="name" placeholder="Product Name" required>
-            <textarea name="description" placeholder="Description" rows="4"></textarea>
-            <input type="number" step="0.01" name="price" placeholder="Price" required>
-            <select name="category_id" required>
-                <option value="">Select Category</option>
-                <option value="1">Electronics</option>
-                <option value="2">Home & Kitchen</option>
-                <option value="3">Accessories</option>
-            </select>
-            <input type="text" name="image_path" placeholder="Image filename (e.g., product.png)" required>
-            <button type="submit" style="padding: 10px; background: #222; color: white; border: none; cursor: pointer;">
-                Add Product
-            </button>
-        </form>
-    </main>
-</body>
-</html>
+        //krijo nje emer unik ne menyr mos me pas overwriting
+        $uniqueName = uniqid() . '_' . time() . '.' . $fileExt;
+        $uploadFile = $uploadDir . $uniqueName;
+        
+        $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+        
+        if (in_array($fileExt, $allowed)) { //kqyr a lejohet file
+
+        //nese lejohet livrite prej venit te perkohshem ne permanent
+            if (move_uploaded_file($_FILES['product_image']['tmp_name'], $uploadFile)) {
+                $image_path = $uniqueName;
+            } else {
+                $error = "Error uploading image.";
+            }
+        } else {
+            $error = "Only JPG, PNG, GIF files allowed.";
+        }
+    }
+    

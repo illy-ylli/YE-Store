@@ -1,3 +1,15 @@
+<?php
+session_start();
+require_once 'config/Database.php';
+
+$db = new Database();
+$conn = $db->getConnection();
+
+// merri produktet elektronike (category_id = 1)
+$stmt = $conn->prepare("SELECT * FROM products WHERE category_id = 1 ORDER BY created_at DESC");
+$stmt->execute();
+$electronicsProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +17,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electronics - Y/E Store</title>
     <link rel="stylesheet" href="frontpage.css">
+    <style>
+        .products-count {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+    </style>
 </head>
 <body>
 <main>
@@ -54,63 +75,58 @@
 
     <main>
         <!-- Faqja elektronikave -->
-<section class="products-section">
-  <h2>Electronics</h2>
-  <div class="product-row">
-    <!-- Produktet e filtrume me opsionin Electronics -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="images/mouse.png" alt="mouse">
-      </div>
-      <div class="product-footer">
-        <h3>Logitech G PRO X Superlight 2</h3>
-        <p>$79.99</p>
-      </div>
-    </div>
-
-           <div class="product-card">
-            <div class="product-image">
-                <img src="images/monitor.png" alt="monitor">
+        <section class="products-section">
+            <h2>Electronics</h2>
+            <div class="products-count">
+                <?= count($electronicsProducts) ?> product(s) found
             </div>
-            <div class="product-footer">
-                <h3>UMax 22 Touch - 22 Inch Portable Monitor</h3>
-                <p>$263.99</p>
+            <div class="product-row">
+                <?php if (count($electronicsProducts) > 0): ?>
+                    <?php foreach ($electronicsProducts as $product): ?>
+                        <a href="product.php?id=<?= $product['id'] ?>" class="product-link">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <?php if($product['image_path'] && file_exists('images/' . $product['image_path'])): ?>
+                                        <img src="images/<?= htmlspecialchars($product['image_path']) ?>" 
+                                             alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <?php else: ?>
+                                        <img src="images/default.png" alt="No Image Available">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="product-footer">
+                                    <h3><?= htmlspecialchars($product['name']) ?></h3>
+                                    <p>$<?= number_format($product['price'], 2) ?></p>
+                                    <?php if($product['is_top_product']): ?>
+                                        <span style="color: #ff9900; font-size: 0.8em;">★ Top Product</span>
+                                    <?php endif; ?>
+                                    <?php if($product['is_new_arrival']): ?>
+                                        <span style="color: #0099ff; font-size: 0.8em;">🆕 New Arrival</span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="product-card placeholder">
+                        <div class="product-image">
+                            <img src="images/nothinghere.png" alt="No Electronics Products">
+                        </div>
+                        <div class="product-footer">
+                            <h3>No Electronics Products Available</h3>
+                            <p>Check back soon or browse other categories</p>
+                        </div>
+                    </div>
+                    <div class="product-card placeholder">
+                        <div class="product-image">
+                            <img src="images/nothinghere.png" alt="No Electronics Products">
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
-        </div>
-            <div class="product-card">
-            <div class="product-image">
-                <img src="images/ereader.png" alt="e-reader">
-            </div>
-            <div class="product-footer">
-                <h3>Amazon Kindle Paperwhite </h3>
-                <p>$189.99</p>
-            </div>
-        </div>
-                <div class="product-card">
-            <div class="product-image">
-                <img src="images/glasses.png" alt="">
-            </div>
-            <div class="product-footer">
-                <h3>Ray-Ban Meta (Gen 1)</h3>
-                <p>$224.99</p>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/amazon.png" alt="">
-            </div>
-            <div class="product-footer">
-                <h3>Amazon Fire TV Stick 4K Plus</h3>
-                <p>$29.99</p>
-            </div>
-        </div>
-  </div>
-</section>
-
+        </section>
     </main>
 </div>
 </main>
-<script src="clickable-products.js"></script>
 <footer class="footer">
     <div class="footer-content">
         <p>Contact us: support@ye-store.com | +383 49 123 456</p>

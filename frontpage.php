@@ -65,7 +65,7 @@ echo '</div>';
             </a>
         </div>
 
-        <nav class="navbar">
+<nav class="navbar">
             <ul class="nav-links">
                 <li class="dropdown"><a href="frontpage.php">Home</a></li>
 
@@ -84,8 +84,7 @@ echo '</div>';
                     </ul>
                 </li>
 
-               <li class="dropdown profile-dropdown">
-    <span class="profile-btn">Profile</span>
+                <li class="dropdown profile-dropdown"><a href="profile.php">Profile</a>
                     <ul class="dropdown-menu">
                         <li><a href="profile.php">My Account</a></li>
                         <li><a href="index.php">Logout</a></li>

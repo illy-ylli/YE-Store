@@ -101,7 +101,6 @@ echo '</div>';
             </div>
         </nav>
     </header>
-
     <!-- banneri -->
     <section class="hero">
         <h1>Welcome to Y/E Online Store</h1>

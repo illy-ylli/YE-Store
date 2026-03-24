@@ -57,8 +57,7 @@
             <h2>About Us</h2>
             <hr>
             <h3>
-                Y/E Store is an easily accessible, reliable, and UPS-certified shipping website created by two ambitious 19-year-olds, 
-                dedicated to bringing you the best online shopping experience.
+            Y/E Store is an easily accessible, reliable, and UPS-certified shipping website dedicated to bringing you the best online shopping experience.
             </h3>
             <p class="about-description">
                 Y/E Store is a fully user-focused online shopping platform, founded and managed by two driven 19-year-olds with a shared vision of revolutionizing e-commerce. 

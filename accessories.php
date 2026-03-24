@@ -114,11 +114,6 @@ $accessoriesProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <p>Check back soon or browse other categories</p>
                         </div>
                     </div>
-                    <div class="product-card placeholder">
-                        <div class="product-image">
-                            <img src="images/nothinghere.png" alt="No Accessories Products">
-                        </div>
-                    </div>
                 <?php endif; ?>
             </div>
         </section>

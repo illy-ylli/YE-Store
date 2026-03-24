@@ -108,11 +108,15 @@ body {
 }
 
 .profile-btn {
+    display: inline-block;
     padding: 6px 12px;
     border: 1px solid gray;
     border-radius: 5px;
     background: white;
     cursor: pointer;
+}
+.nav-links li.dropdown:hover .dropdown-menu {
+    display: block;          /* your existing hover code */
 }
 
 .cart-icon {

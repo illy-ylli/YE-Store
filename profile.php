@@ -21,6 +21,7 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li class="dropdown"><a href="frontpage.php">Home</a></li>
+
                 <li class="dropdown"><a href="#">Categories</a>
                     <ul class="dropdown-menu">
                         <li><a href="electronics.php">Electronics</a></li>
@@ -28,20 +29,22 @@
                         <li><a href="accessories.php">Accessories</a></li>
                     </ul>
                 </li>
+
                 <li class="dropdown"><a href="#">Contact</a>
                     <ul class="dropdown-menu">
                         <li><a href="aboutus.php">About us</a></li>
                         <li><a href="support.php">Support</a></li>
                     </ul>
                 </li>
-                <li class="dropdown profile-dropdown">
-  <a href="javascript:void(0)">Profile</a> <!-- nuk e qon direkt te profili nese klikon te Profile -->
-  <ul class="dropdown-menu">
-      <li><a href="profile.php">My Account</a></li> <!-- vetem kur ta preksh My Account -->
-      <li><a href="index.php">Logout</a></li>
-  </ul>
-</li>
 
+                <li class="dropdown profile-dropdown"><a href="profile.php">Profile</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.php">My Account</a></li>
+                        <li><a href="index.php">Logout</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
 
             <div class="header-icons">
             <a href="cart.php">

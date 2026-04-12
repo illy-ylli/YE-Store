@@ -83,29 +83,29 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
         <a href="frontpage.php"><img src="images/Logo.png" style="height:120px;" alt="Logo"></a>
     </div>
     <nav>
-        <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span> |
-        <a href="index.php">Logout</a>
+        <span>Mirë se vini, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span> 
+        <a href="index.php">Dil</a>
     </nav>
 </header>
 
 <main>
-    <h1>Admin Dashboard</h1>
+    <h1>Paneli i Administratorit</h1>
     
     <div class="admin-nav">
-        <a href="admin_add_product.php">Add New Product</a>
-        <a href="#products">Products</a>
-        <a href="#messages">Messages</a>
+        <a href="admin_add_product.php">Shto produkt të ri</a>
+        <a href="#products">Menaxho Produktet</a>
+        <a href="#messages">Shiko Mesazhet</a>
     </div>
     
     <div class="stats">
-        <div class="stat-box"><h3>Products</h3><div class="number"><?= $totalProducts ?></div></div>
-        <div class="stat-box"><h3>Users</h3><div class="number"><?= $totalUsers ?></div></div>
-        <div class="stat-box"><h3>Messages</h3><div class="number"><?= $totalMessages ?></div><small><?= $unreadMessages ?> unread</small></div>
+        <div class="stat-box"><h3>Produkte</h3><div class="number"><?= $totalProducts ?></div></div>
+        <div class="stat-box"><h3>Përdorues</h3><div class="number"><?= $totalUsers ?></div></div>
+        <div class="stat-box"><h3>Mesazhe</h3><div class="number"><?= $totalMessages ?></div><small><?= $unreadMessages ?> të palexuara</small></div>
     </div>
     
-    <h2 id="products">Products (<?= $totalProducts ?>)</h2>
+    <h2 id="products">Produktet (<?= $totalProducts ?>)</h2>
     <table>
-        <thead><tr><th>ID</th><th>Name</th><th>Price</th><th>Status</th><th>Created By</th><th>Actions</th></tr></thead>
+        <thead><tr><th>ID</th><th>Emri</th><th>Çmimi</th><th>Statusi</th><th>Krijuar nga</th><th>Veprimet</th></tr></thead>
         <tbody>
             <?php foreach($products as $p): ?>
             <tr>
@@ -114,21 +114,21 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
                 <td>$<?= number_format($p['price'], 2) ?></td>
                 <td>
                     <?php if($p['is_top_product']): ?><span class="badge badge-top">Top</span><?php endif; ?>
-                    <?php if($p['is_new_arrival']): ?><span class="badge badge-new">New</span><?php endif; ?>
+                    <?php if($p['is_new_arrival']): ?><span class="badge badge-new">I ri</span><?php endif; ?>
                 </td>
                 <td><?= htmlspecialchars($p['created_by'] ?? 'Unknown') ?></td>
                 <td>
                     <button class="btn btn-edit" onclick="location.href='admin_edit_product.php?id=<?= $p['id'] ?>'">Edit</button>
-                    <button class="btn btn-delete" onclick="if(confirm('Delete product #<?= $p['id'] ?>?')) location.href='admin_delete_product.php?id=<?= $p['id'] ?>'">Delete</button>
+                    <button class="btn btn-delete" onclick="if(confirm('Delete product #<?= $p['id'] ?>?')) location.href='admin_delete_product.php?id=<?= $p['id'] ?>'">Fshij</button>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
     
-    <h2 id="messages">Support Messages (<?= $unreadMessages ?> unread)</h2>
+    <h2 id="messages">Support Mesazhet (<?= $unreadMessages ?> të palexuara)</h2>
     <table>
-        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Message</th><th>Status</th><th>Received</th><th>Actions</th></tr></thead>
+        <thead><tr><th>ID</th><th>Emri</th><th>Email</th><th>Mesazhi</th><th>Statusi</th><th>Pranuar</th><th>Veprimet</th></tr></thead>
         <tbody>
             <?php foreach($messages as $m): ?>
             <tr class="<?= $m['is_read'] ? '' : 'unread' ?>">
@@ -136,11 +136,11 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
                 <td><?= htmlspecialchars($m['name']) ?></td>
                 <td><?= htmlspecialchars($m['email']) ?></td>
                 <td><?= substr(htmlspecialchars($m['message']), 0, 100) . (strlen($m['message']) > 100 ? '...' : '') ?></td>
-                <td><?= $m['is_read'] ? 'Read' : 'Unread' ?></td>
+                <td><?= $m['is_read'] ? 'I lexuar' : 'I palexuar' ?></td>
                 <td><?= date('d/m/Y H:i', strtotime($m['created_at'])) ?></td>
                 <td>
-                    <?php if(!$m['is_read']): ?><a href="?mark_read=<?= $m['id'] ?>" class="btn-read">Mark Read</a><?php endif; ?>
-                    <button class="btn btn-delete" onclick="if(confirm('Delete message #<?= $m['id'] ?>?')) location.href='admin_delete_message.php?id=<?= $m['id'] ?>'">Delete</button>
+                    <?php if(!$m['is_read']): ?><a href="?mark_read=<?= $m['id'] ?>" class="btn-read">Shëno si të lexuar</a><?php endif; ?>
+                    <button class="btn btn-delete" onclick="if(confirm('Delete message #<?= $m['id'] ?>?')) location.href='admin_delete_message.php?id=<?= $m['id'] ?>'">Fshij</button>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -33,17 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
         
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
         
-        if (in_array($fileExt, $allowed)) { //kqyr a lejohet file
-
-        //nese lejohet livrite prej venit te perkohshem ne permanent
+        if (in_array($fileExt, $allowed)) {
             if (move_uploaded_file($_FILES['product_image']['tmp_name'], $uploadFile)) {
                 $image_path = $uniqueName;
             } else {
-                $error = "Error uploading image.";
+                $error = "Gabim gjatë ngarkimit të fotografisë.";
             }
         } else {
-            $error = "Only JPG, PNG, GIF files allowed.";
+            $error = "Lejohen vetëm fotografi JPG, PNG, GIF.";
         }
+    } else {
+        $error = "Ju lutemi zgjidhni një fotografi për produktin.";
     }
     // RUAJTJA NE DATABAZ
      
@@ -71,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
                 ':new' => $is_new_arrival
             ]);
             
-            $success = "Product added successfully! Will appear on homepage.";
-            $_POST = array(); //fshij formen pasi esht perdorur me sukses (puna qe me perdor apet)
+             $success = "Produkti u shtua me sukses! Do të shfaqet në faqen kryesore.";
+            $_POST = array(); // Pastro formën
         } catch (PDOException $e) {
-            $error = "Database error: " . $e->getMessage();
+            $error = "Gabim në database: " . $e->getMessage();
         }
     }
 }
@@ -85,27 +85,172 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product - Admin</title>
+<title>Shto Produkt - Paneli Admin</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
-        /*STILI I FFORMES osht shkru puna qe me rujt hapsir*/
-        .admin-header { background: white; height: 80px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .admin-header nav { display: flex; align-items: center; gap: 15px; color: #666; }
-        .admin-header nav a { color: #666; text-decoration: none; padding: 8px 15px; border-radius: 4px; }
-        .admin-header nav a:hover { background-color: #f0f0f0; color: #222; }
-        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 30px auto; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .form-group textarea { min-height: 100px; resize: vertical; }
-        .checkbox-group { display: flex; gap: 20px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 5px; }
-        .btn { padding: 10px 1px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
-        .btn-primary { background: #222; color: white; }
-        .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
-        .alert { padding: 10px; border-radius: 4px; margin-bottom: 15px; }
-        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .admin-header { 
+            background: linear-gradient(135deg, #fbfbfb 0%, #ffffff 100%);
+            height: 80px; 
+            padding: 0 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .admin-header nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            color: #fff;
+        }
+        
+        .admin-header nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            padding: 8px 18px; 
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-header nav a:hover { 
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .form-container { 
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+           box-shadow: 0 5px 20px rgba(0,0,0,0.88);
+           transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.05); 
+            max-width: 650px; 
+            margin: 40px auto;
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .form-group { 
+            margin-bottom: 25px; 
+        }
+        
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 10px; 
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #ff9800;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,152,0,0.1);
+        }
+        
+        .form-group textarea { 
+            min-height: 100px; 
+            resize: vertical;
+        }
+        
+        .checkbox-group { 
+            display: flex; 
+            gap: 25px; 
+            margin-top: 10px;
+        }
+        
+        .checkbox-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .btn { 
+            padding: 12px 0px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white; 
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+        }
+        
+        .btn-secondary { 
+            background: linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%);
+            color: white; 
+            text-decoration: none; 
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+        
+        .alert { 
+            padding: 12px 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success { 
+            background: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb;
+        }
+        
+        .required-star {
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>

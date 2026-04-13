@@ -40,9 +40,9 @@ if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
 <style>
     .admin-header { background: white; height: 80px; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.1);  position: sticky; top: 0; z-index: 1000; }
     .admin-header nav { display: flex; align-items: center; gap: 20px; color: #373535; }
-    .admin-header nav a { color: #1b1a1a; text-decoration: none; padding: 8px 18px; border-radius: 25px; transition: all 0.3s ease; font-weight: 500;}
-    .admin-header nav a:hover { background-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-    .admin-heaver nav span {background: rgba(255,255,255,0.15); padding: 8px 15px; border-radius: 25px;}
+    .admin-header nav a { color: #1b1a1a; text-decoration: none; padding: 8px 18px; border-radius: 25px; transition: all 0.3s ease; font-weight: 500;display: inline-block; }
+.admin-header nav a:hover { background-color: rgba(0,0,0,0.05);transform: translateY(-3px);box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
+    .admin-header nav span { padding: 8px 15px; border-radius: 25px; color: #1d1c1cc4; font-weight: 600;}
     main { padding: 30px; max-width: 1400px; margin: 0 auto; }
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin: 30px 0; }
     .stat-box { background: linear-gradient(135deg, #fff 0%, #f8f9fa 100% ); padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.88); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.05);}

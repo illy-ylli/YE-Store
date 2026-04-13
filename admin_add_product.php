@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shto Produkt - Paneli Admin</title>
+<title>Shto Produkt - Paneli Administratorit</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
         .admin-header { 
@@ -104,18 +104,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
             gap: 20px; 
             color: #fff;
         }
+        .admin-header nav span {
+    padding: 8px 18px;
+    border-radius: 25px;
+    color: #1d1c1cc4;
+    font-weight: 600;
+}
         
         .admin-header nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            padding: 8px 18px; 
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-header nav a:hover { 
-            background-color: rgba(255,255,255,0.2);
-        }
+    color: #1b1a1a; 
+    text-decoration: none; 
+    padding: 8px 18px; 
+    border-radius: 25px; 
+    transition: all 0.3s ease; 
+    font-weight: 500;
+    display: inline-block; 
+}
+
+.admin-header nav a:hover { 
+    background-color: rgba(0,0,0,0.05);
+    transform: translateY(-3px); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
         
         .form-container { 
             background: white; 
@@ -189,20 +199,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
         }
         
         .btn { 
-            padding: 12px 0px; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary { 
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white; 
-            width: 100%;
-        }
+    padding: 12px 0px; 
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block; /* Shtoni këtë */
+    width: 100%; /* Sigurohuni që është 100% */
+}
+
+.btn-primary { 
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white; 
+    width: 100%;
+    margin-bottom: 15px; 
+}
         
         .btn-primary:hover {
             transform: translateY(-2px);
@@ -210,13 +223,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
         }
         
         .btn-secondary { 
-            background: linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%);
-            color: white; 
-            text-decoration: none; 
-            display: inline-block;
-            text-align: center;
-            width: 100%;
-        }
+    background: linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%);
+    color: white; 
+    text-decoration: none; 
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
+}
         
         .btn-secondary:hover {
             transform: translateY(-2px);
@@ -256,68 +270,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
 <body>
     <header class="admin-header">
         <div class="logo">
-            <a href="admin_dashboard.php"><img src="images/Logo.png" style="height:120px;" alt="Logo"></a>
+            <a href="admin_dashboard.php"><img src="images/Logo.png" style="height:100px;" alt="Logo"></a>
         </div>
         <nav>
-            <a href="admin_dashboard.php">Dashboard</a> |
-            <a href="index.php">Logout</a>
+            <span>Mirë se vini, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span>
+            <a href="index.php">Dil</a>
         </nav>
     </header>
 
     <main>
         <div class="form-container">
-            <h2 style="text-align:center;">Add New Product</h2>
+            <h2>Shto Produkt të Ri</h2>
             
-            <?php if($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
-            <?php if($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+            <?php if($success): ?>
+                <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+            <?php endif; ?>
+            <?php if($error): ?>
+                <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
             
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Product Name *</label>
-                    <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
+                    <label>Emri i Produktit <span class="required-star">*</span></label>
+                    <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="Shembull: Laptop Asus ROG" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+                    <label>Përshkrimi</label>
+                    <textarea name="description" placeholder="Përshkruani produktin në detaje..."><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label>Price *</label>
-                    <input type="number" name="price" value="<?= htmlspecialchars($_POST['price'] ?? '') ?>" step="0.01" min="0" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Category *</label>
-                    <select name="category_id" required>
-                        <option value="">Select Category</option>
-                        <option value="1" <?= ($_POST['category_id'] ?? '') == '1' ? 'selected' : '' ?>>Electronics</option>
-                        <option value="2" <?= ($_POST['category_id'] ?? '') == '2' ? 'selected' : '' ?>>Home & Kitchen</option>
-                        <option value="3" <?= ($_POST['category_id'] ?? '') == '3' ? 'selected' : '' ?>>Accessories</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Product Image *</label>
+                    <label>Fotografia e Produktit <span class="required-star">*</span></label>
                     <input type="file" name="product_image" accept="image/*" required>
+                    <small style="color: #666; display: block; margin-top: 5px;">Lejohen: JPG, JPEG, PNG, GIF</small>
                 </div>
                 
                 <div class="form-group">
-                    <label>Show on Homepage</label>
+                    <label>Shfaq në Faqen Kryesore</label>
                     <div class="checkbox-group">
                         <div class="checkbox-item">
                             <input type="checkbox" name="is_top_product" value="1" checked>
-                            <label>Top Product</label>
+                            <label>Top Produkt</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" name="is_new_arrival" value="1" checked>
-                            <label>New Arrival</label>
+                            <label>Ardhje e Re</label>
                         </div>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary" style="width:100%;">Add Product</button>
-                <a href="admin_dashboard.php" class="btn btn-secondary" style="width:100%;margin-top:10px;text-align:center;">Back to Dashboard</a>
+                <button type="submit" class="btn btn-primary">Shto Produktin</button>
+                <a href="admin_dashboard.php" class="btn btn-secondary">Kthehu te Paneli</a>
             </form>
         </div>
     </main>

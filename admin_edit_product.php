@@ -79,20 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
         ]);
         
         $success = "Produkti u përditësua me sukses!";
-        $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->execute([':id' => $productId]);
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        $error = "Gabim ne databaze: " . $e->getMessage();
+      $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
+            $stmt->execute([':id' => $productId]);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $error = "Gabim në database: " . $e->getMessage();
+        }
     }
 }
-
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editoni Produkt - Paneli Administratorit</title>
+    <title>"Editoni Produkt - Paneli Administratorit"</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
         .admin-header { 
@@ -104,24 +105,188 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             justify-content: space-between; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .admin-header nav { display: flex; align-items: center; gap: 20px; color: #fff; }
-        .admin-header nav a { color: #1b1a1a; text-decoration: none; padding: 8px 15px; border-radius: 4px; }
-        .admin-header nav a:hover { background-color: #f0f0f0; color: #222; }
-        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 30px auto; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .form-group textarea { min-height: 100px; resize: vertical; }
-        .checkbox-group { display: flex; gap: 20px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 5px; }
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
-        .btn-primary { background: #28a745; color: white; }
-        .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
-        .alert { padding: 10px; border-radius: 4px; margin-bottom: 15px; }
-        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .current-image { max-width: 200px; height: auto; border-radius: 4px; border: 1px solid #ddd; margin: 10px 0; }
-        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .admin-header nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            color: #fff;
+        }
+        .admin-header nav a { 
+            color: #1b1a1a; 
+            text-decoration: none; 
+            padding: 8px 18px; 
+            border-radius: 25px; 
+            transition: all 0.3s ease; 
+            font-weight: 500;
+            display: inline-block; 
+        } 
+        .admin-header nav a:hover { 
+            background-color: rgba(0,0,0,0.05);
+            transform: translateY(-3px); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .form-container { 
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.88);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            border: 1px solid rgba(0,0,0,0.05); 
+            max-width: 650px; 
+            margin: 40px auto;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 10px; 
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #ff9800;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,152,0,0.1);
+        }
+
+         .form-group textarea { 
+            min-height: 100px; 
+            resize: vertical;
+        }
+        checkbox-group { 
+            display: flex; 
+            gap: 25px; 
+            margin-top: 10px;
+        }
+        
+        .checkbox-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .current-image {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+        }
+        
+        .image-preview p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .btn { 
+            padding: 12px 0px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white; 
+            width: 100%;
+            margin-bottom: 15px; 
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33,150,243,0.3);
+        }
+        
+        .btn-secondary { 
+            background: linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%);
+            color: white; 
+            text-decoration: none; 
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            margin-top: 0;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26,26,46,0.3);
+        }
+        
+        .alert { 
+            padding: 12px 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success { 
+            background: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb;
+        }
+        
+        .required-star {
+            color: #f44336;
+        }
+        
+        .info-text {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .current-image {
+                max-width: 100px;
+            }
+        }
     </style>
 </head>
 <body>

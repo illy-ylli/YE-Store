@@ -105,12 +105,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             justify-content: space-between; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        
         .admin-header nav { 
             display: flex; 
             align-items: center; 
             gap: 20px; 
             color: #fff;
         }
+        
+        .admin-header nav span {
+            padding: 8px 18px;
+            border-radius: 25px;
+            color: #1d1c1cc4;
+            font-weight: 600;
+        }
+        
         .admin-header nav a { 
             color: #1b1a1a; 
             text-decoration: none; 
@@ -119,12 +128,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             transition: all 0.3s ease; 
             font-weight: 500;
             display: inline-block; 
-        } 
+        }
+        
         .admin-header nav a:hover { 
             background-color: rgba(0,0,0,0.05);
             transform: translateY(-3px); 
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        
         .form-container { 
             background: white; 
             padding: 35px; 
@@ -135,19 +146,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             max-width: 650px; 
             margin: 40px auto;
         }
+        
         .form-container h2 {
             text-align: center;
             color: #1a1a2e;
             margin-bottom: 30px;
             font-size: 1.8rem;
         }
-        .form-group { margin-bottom: 25px; }
+        
+        .form-group { 
+            margin-bottom: 25px; 
+        }
+        
         .form-group label { 
             display: block; 
             margin-bottom: 8px; 
             font-weight: 600;
             color: #333;
         }
+        
         .form-group input, 
         .form-group select, 
         .form-group textarea { 
@@ -159,6 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             font-size: 1rem;
             transition: all 0.3s ease;
         }
+        
         .form-group input:focus, 
         .form-group select:focus, 
         .form-group textarea:focus {
@@ -166,12 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             outline: none;
             box-shadow: 0 0 0 3px rgba(255,152,0,0.1);
         }
-
-         .form-group textarea { 
+        
+        .form-group textarea { 
             min-height: 100px; 
             resize: vertical;
         }
-        checkbox-group { 
+        
+        .checkbox-group { 
             display: flex; 
             gap: 25px; 
             margin-top: 10px;
@@ -295,72 +314,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
             <a href="admin_dashboard.php"><img src="images/Logo.png" style="height:120px;" alt="Logo"></a>
         </div>
         <nav>
-            <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span> |
-            <a href="index.php">Logout</a>
+             <span>Mirë se vini, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span>
+            <a href="index.php">Dil</a>
         </nav>
     </header>
 
     <main>
         <div class="form-container">
-            <h2 style="text-align:center;">Edit Product #<?= $product['id'] ?></h2>
+            <h2>Editoni Produktin #<?= $product['id'] ?></h2>
             
             <?php if($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
             <?php if($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
             
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Product Name *</label>
+                    <label>Emri i Produktit *</label>
                     <input type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>Description</label>
+                    <label>Përshkrimi</label>
                     <textarea name="description"><?= htmlspecialchars($product['description']) ?></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label>Price *</label>
+                    <label>Çmimi *</label>
                     <input type="number" name="price" value="<?= htmlspecialchars($product['price']) ?>" step="0.01" min="0" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>Category *</label>
+                    <label>Kategoria <span class="required-star">*</span></label>
                     <select name="category_id" required>
-                        <option value="1" <?= $product['category_id'] == 1 ? 'selected' : '' ?>>Electronics</option>
-                        <option value="2" <?= $product['category_id'] == 2 ? 'selected' : '' ?>>Home & Kitchen</option>
-                        <option value="3" <?= $product['category_id'] == 3 ? 'selected' : '' ?>>Accessories</option>
+                        <option value="">Zgjidhni Kategorinë</option>
+                        <option value="1" <?= $product['category_id'] == 1 ? 'selected' : '' ?>>Elektronikë</option>
+                        <option value="2" <?= $product['category_id'] == 2 ? 'selected' : '' ?>>Shtëpi & Kuzhinë</option>
+                        <option value="3" <?= $product['category_id'] == 3 ? 'selected' : '' ?>>Aksesorë</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label>Current Image</label>
+                    <label>Fotografia Aktuale</label>
                     <?php if($product['image_path'] && file_exists('images/' . $product['image_path'])): ?>
                         <img src="images/<?= htmlspecialchars($product['image_path']) ?>" class="current-image">
                     <?php else: ?>
-                        <p>No image available</p>
+                        <p>Nuk ka fotografi të ngarkuar për këtë produkt</p>
                     <?php endif; ?>
                     
-                    <label>New Image (Optional)</label>
+                    <label>Ndrysho Fotografinë (Opsionale)</label>
                     <input type="file" name="product_image" accept="image/*">
+                    <small class="info-text">Lejohen: JPG, JPEG, PNG, GIF. Lëreni thate për të mbajtur foton aktuale.</small>
                 </div>
                 
                 <div class="form-group">
-                    <label>Show on Homepage</label>
+                    <label>Shfaq ne Homepage</label>
                     <div class="checkbox-group">
                         <div class="checkbox-item">
                             <input type="checkbox" name="is_top_product" value="1" <?= $product['is_top_product'] ? 'checked' : '' ?>>
-                            <label>Top Product</label>
+                            <label>Top Produkt</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" name="is_new_arrival" value="1" <?= $product['is_new_arrival'] ? 'checked' : '' ?>>
-                            <label>New Arrival</label>
+                            <label>Ardhje e Re</label>
                         </div>
                     </div>
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" style="flex:1;">Update Product</button>
-                    <a href="admin_dashboard.php" class="btn btn-secondary" style="flex:1;text-align:center;">Cancel</a>
+                    <button type="submit" class="btn btn-primary" style="flex:1;">Përditëso Produktin</button>
+                    <a href="admin_dashboard.php" class="btn btn-secondary" style="flex:1;text-align:center;">Kthehu te Paneli</a>
                 </div>
             </form>
         </div>

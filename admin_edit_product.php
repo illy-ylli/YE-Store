@@ -65,29 +65,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
     
     //perditso produktin ne databaz
     if (empty($error)) {
-        $stmt = $conn->prepare("
-            UPDATE products SET name = :name, description = :description, price = :price, 
-            category_id = :category_id, image_path = :image_path, is_top_product = :top, 
-            is_new_arrival = :new, updated_at = NOW() WHERE id = :id
-        ");
+    $stmt = $conn->prepare("
+        UPDATE products SET name = :name, description = :description, price = :price, 
+        category_id = :category_id, image_path = :image_path, is_top_product = :top, 
+        is_new_arrival = :new, updated_at = NOW() WHERE id = :id
+    ");
+    
+    try {
+        $stmt->execute([
+            ':name' => $name, ':description' => $description, ':price' => $price,
+            ':category_id' => $category_id, ':image_path' => $image_path,
+            ':top' => $is_top_product, ':new' => $is_new_arrival, ':id' => $productId
+        ]);
         
-        try {
-            $stmt->execute([
-                ':name' => $name, ':description' => $description, ':price' => $price,
-                ':category_id' => $category_id, ':image_path' => $image_path,
-                ':top' => $is_top_product, ':new' => $is_new_arrival, ':id' => $productId
-            ]);
-            
-            $success = "Produkti u përditësua me sukses!";
-            $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
-            $stmt->execute([':id' => $productId]);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $error = "Gabim ne databaze " . $e->getMessage();
-        }
+        $success = "Produkti u përditësua me sukses!";
+        $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
+        $stmt->execute([':id' => $productId]);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $error = "Gabim ne databaze: " . $e->getMessage();
     }
 }
-?>
 
 <!DOCTYPE html>
 <html lang="en">

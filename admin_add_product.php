@@ -270,7 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //merr data prej post kerkeses
 <body>
     <header class="admin-header">
         <div class="logo">
-            <a href="admin_dashboard.php"><img src="images/Logo.png" style="height:100px;" alt="Logo"></a>
+            <a href="admin_dashboard.php"><img src="images/Logo.png" style="height:120px;" alt="Logo"></a>
         </div>
         <nav>
             <span>Mirë se vini, <?= htmlspecialchars($_SESSION['username']) ?> (Admin)</span>

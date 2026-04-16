@@ -23,7 +23,7 @@ $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
 $stmt->execute([':id' => $productId]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$product) die("Product not found."); //nese produkti nuk ekziston shfaqet mesazhi
+if (!$product) die("Produkti nuk u gjet."); //nese produkti nuk ekziston shfaqet mesazhi
 
 $success = $error = '';
 
@@ -35,8 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
     $is_top_product = isset($_POST['is_top_product']) ? 1 : 0;
     $is_new_arrival = isset($_POST['is_new_arrival']) ? 1 : 0;
     
+    //ruje foton ekzistuse si default
     $image_path = $product['image_path'];
-    
+    // me kontrollu nese osht ngarku naj foto e re
     if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'images/';
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
@@ -49,18 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
         
         if (in_array($fileExt, $allowed)) {
             if (move_uploaded_file($_FILES['product_image']['tmp_name'], $uploadFile)) {
+                // fshije foton e vjeter nese nuk esht default
                 if ($image_path !== 'default.png' && file_exists($uploadDir . $image_path)) {
                     unlink($uploadDir . $image_path);
                 }
                 $image_path = $uniqueName;
             } else {
-                $error = "Error uploading image.";
+                $error = "Gabim gjatë ngarkimit të fotografisë.";
             }
         } else {
-            $error = "Only JPG, PNG, GIF files allowed.";
+            $error = "Lejohen vetëm fotografi JPG, PNG, GIF.";
         }
     }
     
+    //perditso produktin ne databaz
     if (empty($error)) {
         $stmt = $conn->prepare("
             UPDATE products SET name = :name, description = :description, price = :price, 
@@ -75,12 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
                 ':top' => $is_top_product, ':new' => $is_new_arrival, ':id' => $productId
             ]);
             
-            $success = "Product updated successfully!";
+            $success = "Produkti u përditësua me sukses!";
             $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
             $stmt->execute([':id' => $productId]);
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $error = "Database error: " . $e->getMessage();
+            $error = "Gabim ne databaze " . $e->getMessage();
         }
     }
 }
@@ -91,12 +94,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //merr data prej post kerkeses
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product - Admin</title>
+    <title>Editoni Produkt - Paneli Administratorit</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
-        .admin-header { background: white; height: 80px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .admin-header nav { display: flex; align-items: center; gap: 15px; color: #666; }
-        .admin-header nav a { color: #666; text-decoration: none; padding: 8px 15px; border-radius: 4px; }
+        .admin-header { 
+            background: linear-gradient(135deg, #fbfbfb 0%, #ffffff 100%);
+            height: 80px; 
+            padding: 0 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .admin-header nav { display: flex; align-items: center; gap: 20px; color: #fff; }
+        .admin-header nav a { color: #1b1a1a; text-decoration: none; padding: 8px 15px; border-radius: 4px; }
         .admin-header nav a:hover { background-color: #f0f0f0; color: #222; }
         .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 30px auto; }
         .form-group { margin-bottom: 20px; }

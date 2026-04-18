@@ -10,23 +10,23 @@
 
 <!-- login forma -->
 <div class="login-box" id="loginBox">
-    <h2 class="form-title">Sign In</h2>
+    <h2 class="form-title">Sign in</h2>
     
     <!-- mesazhi error per login-->
     <div class="error-message" id="loginError"></div>
     
     <!-- Username inputi -->
-    <input type="text" placeholder="Username or Email" class="username-input" id="loginUsername">
+    <input type="text" placeholder="Username ose Email" class="username-input" id="loginUsername">
     
     <!-- Password inputi -->
     <input type="password" placeholder="Password" class="password-input" id="loginPassword">
     
-    <p class="forgot" id="forgot-btn">Forgot password?</p>
+    <p class="forgot" id="forgot-btn">Harruat fjalëkalimin?</p>
     <button class="next-btn" id="loginBtn">Sign In</button>
     
-    <p class="switch-link" id="showRegister">Don't have an account? Sign Up</p>
+    <p class="switch-link" id="showRegister">Nuk keni llogari? Regjistrohuni</p>
     
-    <p class="or-continue">or continue with</p>
+    <p class="or-continue">ose vazhdo me</p>
     
     <div class="alt-login">
         <button class="gsi-material-button">
@@ -42,7 +42,7 @@
                         <path fill="none" d="M0 0h48v48H0z"></path>
                     </svg>
                 </div>
-                <span class="gsi-material-button-contents">Sign in with Google</span>
+                <span class="gsi-material-button-contents">Kyçu me Google</span>
             </div>
         </button>
     </div>
@@ -50,7 +50,7 @@
 
 <!-- forma e regjistrimit -->
 <div class="login-box register-box" id="registerBox">
-    <h2 class="form-title">Create Account</h2>
+    <h2 class="form-title">Regjistrohu</h2>
     
     <!-- Mesazhi error per regjistrim -->
     <div class="error-message" id="registerError"></div>
@@ -62,7 +62,7 @@
     <input type="text" placeholder="Username" class="username-input" id="regUsername">
     <input type="email" placeholder="Email Address" class="username-input" id="regEmail">
     <input type="password" placeholder="Password" class="password-input" id="regPassword">
-    <input type="text" placeholder="Full Name (Optional)" class="username-input" id="regFullName">
+    <input type="text" placeholder="Emri dhe mbiemri (Opcionale)" class="username-input" id="regFullName">
     
     <select class="country-select" id="regCountry">
         <option value="Kosovo">Kosovo</option>
@@ -70,17 +70,17 @@
         <option value="Other">Other</option>
     </select>
     
-    <button class="next-btn" id="registerBtn">Create Account</button>
+    <button class="next-btn" id="registerBtn">Krijo Llogari</button>
     
-    <p class="switch-link" id="showLogin">Already have an account? Sign In</p>
+    <p class="switch-link" id="showLogin">Keni një llogari? Sign in</p>
 </div>
 
 <!-- pass reset boxi -->
 <div class="reset-box" id="reset-box" style="display:none;">
-    <h2>Reset Password</h2>
-    <input type="email" id="reset-email" placeholder="Enter your email">
-    <button id="reset-submit">Send reset link</button>
-    <p id="reset-back" style="cursor:pointer;">Back</p>
+    <h2>Ndrysho fjalëkalimin</h2>
+    <input type="email" id="reset-email" placeholder="Shkruani emailin tuaj">
+    <button id="reset-submit">Dërgo linkun per ndryshim</button>
+    <p id="reset-back" style="cursor:pointer;">Kthehu</p>
 </div>
 
 <div id="reset-popup" style="display:none;" class="popup-reset">

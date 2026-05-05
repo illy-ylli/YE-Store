@@ -37,29 +37,29 @@
             </a>
         </div>
 
-        <nav class="navbar">
+<nav class="navbar">
             <ul class="nav-links">
                 <li class="dropdown"><a href="frontpage.php">Home</a></li>
 
-                <li class="dropdown"><a href="#">Categories</a>
+                <li class="dropdown"><a href="#">Kategoritë</a>
                     <ul class="dropdown-menu">
-                        <li><a href="electronics.php">Electronics</a></li>
-                        <li><a href="homekitchen.php">Home & Kitchen</a></li>
-                        <li><a href="accessories.php">Accessories</a></li>
+                        <li><a href="electronics.php">Elektronikë</a></li>
+                        <li><a href="homekitchen.php">Shtëpiake & Kuzhinë</a></li>
+                        <li><a href="accessories.php">Aksesorë</a></li>
                     </ul>
                 </li>
 
-                <li class="dropdown"><a href="#">Contact</a>
+                <li class="dropdown"><a href="#">Kontakt</a>
                     <ul class="dropdown-menu">
-                        <li><a href="aboutus.php">About us</a></li>
-                        <li><a href="support.php">Support</a></li>
+                        <li><a href="aboutus.php">Rreth nesh</a></li>
+                        <li><a href="support.php">Mbështetje</a></li>
                     </ul>
                 </li>
 
-                <li class="dropdown profile-dropdown"><a href="profile.php">Profile</a>
+                <li class="dropdown profile-dropdown"><a href="profile.php">Profili</a>
                     <ul class="dropdown-menu">
-                        <li><a href="profile.php">My Account</a></li>
-                        <li><a href="index.php">Logout</a></li>
+                        <li><a href="profile.php">Llogaria ime</a></li>
+                        <li><a href="index.php">Dilni</a></li>
                         
                     </ul>
                 </li>

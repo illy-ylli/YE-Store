@@ -17,39 +17,40 @@
                 </a>
             </div>
 
-            <nav class="navbar">
-                <ul class="nav-links">
-                    <li><a href="frontpage.php">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Categories</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="electronics.php">Electronics</a></li>
-                            <li><a href="homekitchen.php">Home & Kitchen</a></li>
-                            <li><a href="accessories.php">Accessories</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Contact</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="aboutus.php">About Us</a></li>
-                            <li><a href="support.php">Support</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown profile-dropdown">
-                        <a href="profile.php">Profile</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="profile.php">My Account</a></li>
-                            <li><a href="index.php">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li class="dropdown"><a href="frontpage.php">Home</a></li>
 
-                <div class="header-icons">
-                    <a href="cart.php">
-                        <img src="images/cart.png" class="cart-icon" alt="Cart">
-                    </a>
-                </div>
-            </nav>
+                <li class="dropdown"><a href="#">Kategoritë</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="electronics.php">Elektronikë</a></li>
+                        <li><a href="homekitchen.php">Shtëpiake & Kuzhinë</a></li>
+                        <li><a href="accessories.php">Aksesorë</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href="#">Kontakt</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="aboutus.php">Rreth nesh</a></li>
+                        <li><a href="support.php">Mbështetje</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown profile-dropdown"><a href="profile.php">Profili</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.php">Llogaria ime</a></li>
+                        <li><a href="index.php">Dilni</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="header-icons">
+            <a href="cart.php">
+            <img src="images/cart.png" class="cart-icon" alt="Cart">
+            </a>
+            </div>
+        </nav>
         </header>
 
         <!-- Sektori about us (rreth neve) -->

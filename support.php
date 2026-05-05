@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" placeholder="Write your message..." rows="6" required></textarea>
-            <button type="submit">Send Message</button>
+            <button type="submit">Dërgo Mesazh</button>
         </form>
     </main>
 </div>
@@ -152,9 +152,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
+        <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+        <p>Na ndiqni në rrjetet sociale</p>
+        <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
     </div>
 </footer>
 </body>

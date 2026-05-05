@@ -102,13 +102,13 @@ echo '</div>';
     </header>
     <!-- banneri -->
     <section class="hero">
-        <h1>Welcome to Y/E Online Store</h1>
-        <p>Discover the latest products at the best prices.</p>
+        <h1>Mirë se vini në Y/E Online Store</h1>
+        <p>Zbuloni produktet më të fundit me çmimet më të mira.</p>
     </section>
 
     <!-- top produktet -->
 <section class="products-section">
-    <h2>Top Products <span style="font-size: 1rem; color: #666;"></span></h2>
+    <h2>Produktet Kryesore <span style="font-size: 1rem; color: #666;"></span></h2>
     <div class="product-row">
         <?php if (count($topProducts) > 0): ?>
             <?php foreach ($topProducts as $product): ?>
@@ -147,8 +147,8 @@ echo '</div>';
                     <img src="images/nothinghere.png" alt="No Products Available">
                 </div>
                 <div class="product-footer">
-                    <h3>No Top Products in Database</h3>
-                    <p>Add products via Admin Panel and check "Top Product"</p>
+                    <h3>Nuk ka produkte kryesore në databazë</h3>
+                    <p>Shtoni produkte përmes Panelit të Administratorit dhe shënoni "Produkt Kryesor"</p>
                 </div>
             </div>
         <?php endif; ?>
@@ -157,7 +157,7 @@ echo '</div>';
 
 <!-- produktet e reja (prej databaze) -->
 <section class="products-section">
-    <h2>New Arrivals <span style="font-size: 1rem; color: #666;"></span></h2>
+    <h2>Produkte të Reja <span style="font-size: 1rem; color: #666;"></span></h2>
     <div class="product-row">
         <?php if (count($newArrivals) > 0): ?>
             <?php foreach ($newArrivals as $product): ?>
@@ -196,8 +196,8 @@ echo '</div>';
                     <img src="images/nothinghere.png" alt="No Products Available">
                 </div>
                 <div class="product-footer">
-                    <h3>No New Arrivals in Database</h3>
-                    <p>Add products via Admin Panel and check "New Arrival"</p>
+                    <h3>Nuk ka produkte të reja në databazë</h3>
+                    <p>Shtoni produkte përmes Panelit të Administratorit dhe shënoni "Produkt i Ri"</p>
                 </div>
             </div>
         <?php endif; ?>
@@ -209,9 +209,9 @@ echo '</div>';
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
+        <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+        <p>Na ndiqni në rrjetet sociale</p>
+        <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
     </div>
 </footer>
 

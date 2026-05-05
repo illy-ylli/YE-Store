@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Y/E Store</title>
+    <title>Rreth nesh - Y/E Store</title>
     <link rel="stylesheet" href="frontpage.css">
 </head>
 <body>
@@ -55,28 +55,28 @@
 
         <!-- Sektori about us (rreth neve) -->
         <section class="about-section">
-            <h2>About Us</h2>
+            <h2>Rreth nesh</h2>
             <hr>
             <h3>
-            Y/E Store is an easily accessible, reliable, and UPS-certified shipping website dedicated to bringing you the best online shopping experience.
+            Y/E Store është një faqe transporti e aksesueshme lehtësisht, e besueshme dhe e certifikuar nga UPS, e dedikuar për t’ju ofruar përvojën më të mirë të blerjeve online.
             </h3>
             <p class="about-description">
-                Y/E Store is a fully user-focused online shopping platform, founded and managed by two driven 19-year-olds with a shared vision of revolutionizing e-commerce. 
-        Our platform is designed to be intuitive, responsive, and secure, ensuring that every interaction you have is seamless. 
-        We carefully curate our products, ranging from electronics and home essentials to unique lifestyle items, maintaining quality while keeping prices competitive. 
-        Our UPS-certified shipping guarantees reliable delivery, and we constantly monitor order tracking to ensure you always know where your package is. 
-        Customer support is available around the clock, and we take feedback seriously to continuously improve our services. 
-        At Y/E Store, we combine youthful energy, modern technology, and professional dedication to make online shopping simple, safe, and enjoyable for everyone. 
-        Whether you’re a first-time buyer or a seasoned online shopper, we aim to exceed expectations in both service and convenience.
+                Y/E Store është një platformë blerjesh online e përqendruar plotësisht te përdoruesi, e themeluar dhe menaxhuar nga dy 19-vjeçarë me vullnet të fortë dhe një vizion të përbashkët për të revolucionarizuar e-commerce-in.
+Platforma jonë është e dizajnuar të jetë intuitive, responsive dhe e sigurt, duke siguruar që çdo ndërveprim të jetë i rrjedhshëm dhe pa probleme.
+Ne i përzgjedhim me kujdes produktet tona, duke filluar nga elektronika dhe pajisjet shtëpiake deri te artikuj unikë të stilit të jetesës, duke ruajtur cilësinë dhe njëkohësisht çmime konkurruese.
+Transporti i certifikuar nga UPS garanton dërgesa të besueshme, dhe ne monitorojmë vazhdimisht gjurmimin e porosive për t’u siguruar që gjithmonë e dini ku ndodhet paketa juaj.
+Shërbimi ndaj klientit është i disponueshëm 24/7, dhe ne i marrim seriozisht feedback-un për të përmirësuar vazhdimisht shërbimet tona.
+Në Y/E Store, ne kombinojmë energjinë rinore, teknologjinë moderne dhe përkushtimin profesional për ta bërë blerjen online të thjeshtë, të sigurt dhe të këndshme për të gjithë.
+Qoftë hera juaj e parë që blini online apo jeni përdorues i rregullt, ne synojmë të tejkalojmë pritshmëritë tuaja si në shërbim ashtu edhe në lehtësi përdorimi.
             </p>
         </section>
 </main>
         <!-- FOOTER -->
         <footer class="footer">
             <div class="footer-content">
-                <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-                <p>Follow us on social media</p>
-                <p>© 2025 Y/E Store — All rights reserved.</p>
+                <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+                <p>Na ndiqni në rrjetet sociale</p>
+                <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
             </div>
         </footer>
     </div>

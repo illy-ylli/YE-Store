@@ -15,7 +15,7 @@ $accessoriesProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessories - Y/E Store</title>
+    <title>Kategoritë - Y/E Store</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
         .products-count {
@@ -74,7 +74,7 @@ $accessoriesProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main>
         <section class="products-section">
-            <h2>Accessories</h2>
+            <h2>Aksesorë</h2>
             <div class="products-count">
                 <?= count($accessoriesProducts) ?> product(s) found
             </div>
@@ -110,8 +110,8 @@ $accessoriesProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="images/nothinghere.png" alt="No Accessories Products">
                         </div>
                         <div class="product-footer">
-                            <h3>No Accessories Products Available</h3>
-                            <p>Check back soon or browse other categories</p>
+                            <h3>Nuk ka produkte në kategorinë Aksesorë</h3>
+                            <p>Kthehuni më vonë ose shfletoni kategori të tjera</p>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -122,9 +122,9 @@ $accessoriesProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 <footer class="footer">
     <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
+        <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+        <p>Na ndiqni në rrjetet sociale</p>
+        <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
     </div>
 </footer>
 

@@ -15,7 +15,7 @@ $homeKitchenProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home & Kitchen - Y/E Store</title>
+    <title>Produkte Shtëpiake & Kuzhinë - Y/E Store</title>
     <link rel="stylesheet" href="frontpage.css">
     <style>
         .products-count {
@@ -74,7 +74,7 @@ $homeKitchenProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main>
         <section class="products-section">
-            <h2>Home & Kitchen</h2>
+            <h2>Shtëpiake & Kuzhinë</h2>
             <div class="products-count">
                 <?= count($homeKitchenProducts) ?> product(s) found
             </div>
@@ -110,8 +110,8 @@ $homeKitchenProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="images/nothinghere.png" alt="No Home & Kitchen Products">
                         </div>
                         <div class="product-footer">
-                            <h3>No Home & Kitchen Products Available</h3>
-                            <p>Check back soon or browse other categories</p>
+                            <h3>Nuk ka produkte për Shtëpi & Kuzhinë në dispozicion</h3>
+                            <p>Kthehuni më vonë ose shfletoni kategori të tjera</p>
                         </div>
                     </div>
                     <div class="product-card placeholder">
@@ -127,9 +127,9 @@ $homeKitchenProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 <footer class="footer">
     <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
+                <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+                <p>Na ndiqni në rrjetet sociale</p>
+                <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
     </div>
 </footer>
 

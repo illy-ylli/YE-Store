@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - Y/E Store</title>
+    <title>Shporta e blerjeve - Y/E Store</title>
     <link rel="stylesheet" href="frontpage.css">
      <style>
         
@@ -75,15 +75,15 @@
 
     <main class="empty-cart">
         <img src="images/emptycart.png" alt="Empty Cart">
-        <p>Your cart is empty!</p>
+        <p>Shporta juaj është bosh!</p>
     </main>
 </div>
 </main>
 <footer class="footer">
     <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
+        <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+        <p>Na ndiqni në rrjetet sociale</p>
+        <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
     </div>
 </footer>
 

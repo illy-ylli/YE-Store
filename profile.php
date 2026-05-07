@@ -1,3 +1,82 @@
+<?php
+// profile.php
+session_start();
+require_once 'config/Database.php';
+
+// Kontrollo nese perdoruesi eshte i kycur
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit;
+}
+
+$db = new Database();
+$conn = $db->getConnection();
+
+// Merr te dhenat e perdoruesit nga database
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+$stmt->execute([':id' => $_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Per te dhenat e profilit (nese nuk ekzistojne ne database)
+$fullName = $user['full_name'] ?? '';
+$country = $user['country'] ?? 'Kosovo';
+$profilePicture = $user['profile_picture'] ?? 'default-profile.png';
+
+// Merr metodat e pageses se perdoruesit
+$stmt = $conn->prepare("SELECT * FROM payment_methods WHERE user_id = :user_id ORDER BY created_at DESC");
+$stmt->execute([':user_id' => $_SESSION['user_id']]);
+$paymentMethods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Shtimi i metodes se re te pageses
+$paymentSuccess = $paymentError = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment'])) {
+    $cardName = $_POST['card_name'] ?? '';
+    $cardNumber = $_POST['card_number'] ?? '';
+    $expiryDate = $_POST['expiry_date'] ?? '';
+    $cvv = $_POST['cvv'] ?? '';
+    
+    // Validimi i thjeshte
+    if (empty($cardName) || empty($cardNumber) || empty($expiryDate) || empty($cvv)) {
+        $paymentError = "Ju lutemi plotesoni te gjitha fushat.";
+    } else {
+        // Ruaje ne database
+        $stmt = $conn->prepare("
+            INSERT INTO payment_methods (user_id, card_name, card_number, expiry_date, cvv, created_at) 
+            VALUES (:user_id, :card_name, :card_number, :expiry_date, :cvv, NOW())
+        ");
+        
+        $stmt->execute([
+            ':user_id' => $_SESSION['user_id'],
+            ':card_name' => $cardName,
+            ':card_number' => $cardNumber,
+            ':expiry_date' => $expiryDate,
+            ':cvv' => $cvv
+        ]);
+        
+        $paymentSuccess = "Metoda e pageses u shtua me sukses!";
+        
+        // Rifresko metodat e pageses
+        $stmt = $conn->prepare("SELECT * FROM payment_methods WHERE user_id = :user_id ORDER BY created_at DESC");
+        $stmt->execute([':user_id' => $_SESSION['user_id']]);
+        $paymentMethods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+// Fshirja e metodes se pageses
+if (isset($_GET['delete_payment']) && is_numeric($_GET['delete_payment'])) {
+    $paymentId = (int)$_GET['delete_payment'];
+    $stmt = $conn->prepare("DELETE FROM payment_methods WHERE id = :id AND user_id = :user_id");
+    $stmt->execute([':id' => $paymentId, ':user_id' => $_SESSION['user_id']]);
+    header("Location: profile.php");
+    exit;
+}
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

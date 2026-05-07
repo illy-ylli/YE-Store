@@ -70,19 +70,74 @@ if (isset($_GET['delete_payment']) && is_numeric($_GET['delete_payment'])) {
     header("Location: profile.php");
     exit;
 }
+// Perditesimi i profilit
+$profileSuccess = $profileError = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
+    $fullName = $_POST['full_name'] ?? '';
+    $country = $_POST['country'] ?? '';
+    $email = $_POST['email'] ?? '';
+    
+    // Perditeso te dhenat
+    $stmt = $conn->prepare("
+        UPDATE users SET full_name = :full_name, country = :country, email = :email WHERE id = :id
+    ");
+    
+    if ($stmt->execute([
+        ':full_name' => $fullName,
+        ':country' => $country,
+        ':email' => $email,
+        ':id' => $_SESSION['user_id']
+    ])) {
+        $profileSuccess = "Te dhenat u perditesuan me sukses!";
+        $_SESSION['email'] = $email;
+        
+        // Rifresko te dhenat e perdoruesit
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->execute([':id' => $_SESSION['user_id']]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $fullName = $user['full_name'] ?? '';
+        $country = $user['country'] ?? 'Kosovo';
+    } else {
+        $profileError = "Gabim gjate perditesimit te te dhenave.";
+    }
+}
 
-
-
-
-
-
-
+// Ndryshimi i fjalekalimit
+$passwordSuccess = $passwordError = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
+    $currentPassword = $_POST['current_password'] ?? '';
+    $newPassword = $_POST['new_password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
+    
+    // Verifiko fjalekalimin aktual
+    $stmt = $conn->prepare("SELECT password FROM users WHERE id = :id");
+    $stmt->execute([':id' => $_SESSION['user_id']]);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (password_verify($currentPassword, $userData['password'])) {
+        if ($newPassword === $confirmPassword) {
+            if (strlen($newPassword) >= 6) {
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $stmt = $conn->prepare("UPDATE users SET password = :password WHERE id = :id");
+                $stmt->execute([':password' => $hashedPassword, ':id' => $_SESSION['user_id']]);
+                $passwordSuccess = "Fjalekalimi u ndryshua me sukses!";
+            } else {
+                $passwordError = "Fjalekalimi i ri duhet te kete te pakten 6 karaktere.";
+            }
+        } else {
+            $passwordError = "Fjalekalimi i ri dhe konfirmimi nuk perputhen.";
+        }
+    } else {
+        $passwordError = "Fjalekalimi aktual eshte i pasakte.";
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Account - Y/E Store</title>
+<title>Profili im - Y/E Store</title>
 <link rel="stylesheet" href="frontpage.css">
 <link rel="stylesheet" href="profile.css">
 </head>
@@ -132,48 +187,7 @@ if (isset($_GET['delete_payment']) && is_numeric($_GET['delete_payment'])) {
             </div>
         </nav>
     </header>
+     <main>
 
-    <!-- permbajtja e profilit -->
-    <main>
-        <!-- profili me foto -->
-        <div class="profile-header">
-            <img src="images/foto-profili.png" alt="Profile Picture">
-            <h1>My Account</h1>
-        </div>
-
-        <!-- info e account -->
-        <div class="profile-section">
-            <h2>Personal Information</h2>
-            <p><strong>Name:</strong> Filon Fisteki</p>
-            <p><strong>Email:</strong> filoni67@example.com</p>
-            <p><strong>Country:</strong> Kosovo</p>
-            <button>Change Account Details</button>
-        </div>
-
-        <!-- detaje te passwordit -->
-        <div class="profile-section">
-            <h2>Security</h2>
-            <p>Change your password or reset it if you forgot.</p>
-            <button>Reset Password</button>
-        </div>
-
-        <!-- metodat e pageses -->
-        <div class="profile-section">
-            <h2>Payment Methods</h2>
-            <p>Add or manage your payment methods.</p>
-            <button>Add Payment Method</button>
-        </div>
-    </main>
-</div>
-
-<!-- Footeri -->
-<footer class="footer">
-    <div class="footer-content">
-        <p>Contact us: support@ye-store.com | +383 49 123 456</p>
-        <p>Follow us on social media</p>
-        <p>© 2025 Y/E Store — All rights reserved.</p>
-    </div>
-</footer>
-
-</body>
+        </body>
 </html>

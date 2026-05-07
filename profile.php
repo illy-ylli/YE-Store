@@ -188,6 +188,190 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         </nav>
     </header>
      <main>
+ <!-- Headeri i profilit -->
+        <div class="profile-header">
+            <img src="images/<?= htmlspecialchars($profilePicture) ?>" alt="Foto e profilit">
+            <div>
+                <h1><?= htmlspecialchars($user['username']) ?></h1>
+                <p>Anëtar që nga: <?= date('d/m/Y', strtotime($user['created_at'] ?? 'now')) ?></p>
+            </div>
+        </div>
 
+        <!-- Seksioni i te dhenave personale -->
+        <div class="profile-section">
+            <h2>Të Dhënat Personale</h2>
+            
+            <?php if($profileSuccess): ?>
+                <div class="alert alert-success"><?= htmlspecialchars($profileSuccess) ?></div>
+            <?php endif; ?>
+            <?php if($profileError): ?>
+                <div class="alert alert-error"><?= htmlspecialchars($profileError) ?></div>
+            <?php endif; ?>
+            
+            <form method="POST">
+                <div class="row-2cols">
+                    <div class="form-group">
+                        <label>Emri i plotë</label>
+                        <input type="text" name="full_name" value="<?= htmlspecialchars($fullName) ?>" placeholder="Emri juaj i plotë">
+                    </div>
+                    <div class="form-group">
+                        <label>Emri i përdoruesit</label>
+                        <input type="text" value="<?= htmlspecialchars($user['username']) ?>" disabled style="background: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Shteti</label>
+                        <select name="country">
+                            <option value="Kosovo" <?= $country == 'Kosovo' ? 'selected' : '' ?>>Kosovo</option>
+                            <option value="Albania" <?= $country == 'Albania' ? 'selected' : '' ?>>Albania</option>
+                            <option value="Other" <?= $country == 'Other' ? 'selected' : '' ?>>Tjetër</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" name="update_profile" class="btn btn-primary">Ruaj Ndryshimet</button>
+            </form>
+        </div>
+
+        <!-- Seksioni i sigurisë (ndryshimi i fjalëkalimit) -->
+        <div class="profile-section">
+            <h2>Siguria</h2>
+            
+            <?php if($passwordSuccess): ?>
+                <div class="alert alert-success"><?= htmlspecialchars($passwordSuccess) ?></div>
+            <?php endif; ?>
+            <?php if($passwordError): ?>
+                <div class="alert alert-error"><?= htmlspecialchars($passwordError) ?></div>
+            <?php endif; ?>
+            
+            <form method="POST">
+                <div class="row-2cols">
+                    <div class="form-group">
+                        <label>Fjalëkalimi aktual</label>
+                        <input type="password" name="current_password" placeholder="Fjalëkalimi aktual" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fjalëkalimi i ri</label>
+                        <input type="password" name="new_password" placeholder="Fjalëkalimi i ri" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Konfirmo fjalëkalimin e ri</label>
+                        <input type="password" name="confirm_password" placeholder="Konfirmo fjalëkalimin" required>
+                    </div>
+                </div>
+                <button type="submit" name="change_password" class="btn btn-primary">Ndrysho Fjalëkalimin</button>
+            </form>
+        </div>
+
+        <!-- Seksioni i metodave te pageses -->
+        <div class="profile-section">
+            <h2>Metodat e Pagesës</h2>
+            
+            <?php if($paymentSuccess): ?>
+                <div class="alert alert-success"><?= htmlspecialchars($paymentSuccess) ?></div>
+            <?php endif; ?>
+            <?php if($paymentError): ?>
+                <div class="alert alert-error"><?= htmlspecialchars($paymentError) ?></div>
+            <?php endif; ?>
+            
+            <!-- Lista e kartave të ruajtura -->
+            <?php if(count($paymentMethods) > 0): ?>
+                <div style="margin-bottom: 25px;">
+                    <h3 style="margin-bottom: 15px; color: #666;">Kartat e ruajtura:</h3>
+                    <?php foreach($paymentMethods as $card): ?>
+                        <div class="payment-card">
+                            <div class="payment-info">
+                                <div class="card-icon">💳</div>
+                                <div class="payment-details">
+                                    <strong><?= htmlspecialchars($card['card_name']) ?></strong>
+                                    <span class="card-number-masked">•••• •••• •••• <?= substr($card['card_number'], -4) ?></span>
+                                    <small>Skadon: <?= htmlspecialchars($card['expiry_date']) ?></small>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger" onclick="if(confirm('A jeni i sigurt që dëshironi të fshini këtë kartë?')) location.href='profile.php?delete_payment=<?= $card['id'] ?>'">🗑️ Fshije</button>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert" style="background: #f0f0f0; color: #666; text-align: center;">
+                    Nuk keni asnjë kartë të ruajtur.
+                </div>
+            <?php endif; ?>
+            
+            <!-- Butoni per shtim te kartes te re -->
+            <button class="btn btn-success" onclick="document.getElementById('paymentModal').style.display='flex'" style="width: auto;">Shto Kartë të Re</button>
+        </div>
+    </main>
+</div>
+
+<!-- Modal per shtimin e kartes -->
+<div id="paymentModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal" onclick="document.getElementById('paymentModal').style.display='none'">&times;</span>
+        <h3>Shto Kartë të Re</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label>Emri në kartë</label>
+                <input type="text" name="card_name" placeholder="Emri mbi kartë" required>
+            </div>
+            <div class="form-group">
+                <label>Numri i kartës</label>
+                <input type="text" name="card_number" placeholder="16 shifra" maxlength="19" required>
+            </div>
+            <div class="row-2cols">
+                <div class="form-group">
+                    <label>Data e skadimit (MM/YY)</label>
+                    <input type="text" name="expiry_date" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label>CVV</label>
+                    <input type="password" name="cvv" placeholder="CVV" maxlength="4" required>
+                </div>
+            </div>
+            <button type="submit" name="add_payment" class="btn btn-primary" style="width: 100%;">Ruaj Kartën</button>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>Na kontaktoni: support@ye-store.com | +383 49 123 456</p>
+        <p>Na ndiqni në rrjetet sociale</p>
+        <p>© 2025 Y/E Store — Të gjitha të drejtat e rezervuara.</p>
+    </div>
+</footer>
+<script>
+    // Mbyll modalin kur klikohet jashte
+    window.onclick = function(event) {
+        var modal = document.getElementById('paymentModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Formatimi i numrit te kartes (shton hapesire cdo 4 shifra)
+    document.querySelector('input[name="card_number"]')?.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\s/g, '');
+        if (value.length > 16) value = value.slice(0, 16);
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+            if (i > 0 && i % 4 === 0) formatted += ' ';
+            formatted += value[i];
+        }
+        e.target.value = formatted;
+    });
+    
+    // Formatimi i dates se skadimit (shton / automatikisht)
+    document.querySelector('input[name="expiry_date"]')?.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        e.target.value = value;
+    });
+</script>
         </body>
 </html>
